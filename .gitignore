@@ -1,3 +1,6 @@
+# Private Developer Tools & Scripts
+generate_banner.ps1
+
 # Operating System Files
 .DS_Store
 Thumbs.db
@@ -5,6 +8,7 @@ desktop.ini
 
 # Environment & Secret Files
 .env
+.env.*
 .env.local
 *.log
 

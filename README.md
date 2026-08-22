@@ -1,6 +1,6 @@
 # Leonardo Levi Joaquin Colorado — Professional Portfolio
 
-A modern, high-performance portfolio built with a **Minimalist White & Emerald Green** aesthetic, highlighting software development skills, AI workflows, SQL databases, and 4+ years of American Eagle Outfitters (AEO) operational leadership.
+A modern, high-performance portfolio highlighting software development skills, AI workflows, SQL databases, and 4+ years of American Eagle Outfitters (AEO) operational leadership.
 
 ---
 
@@ -8,46 +8,73 @@ A modern, high-performance portfolio built with a **Minimalist White & Emerald G
 
 ```
 portfolio/
-├── index.html       # Complete standalone modern web app (Tailwind CSS, Lucide icons, Dark/Light mode)
+├── index.html       # Standalone main portfolio page (Tailwind CSS, Lucide icons, Dark/Light mode)
+├── triage-engine/   # AI Escalation Triage Engine sub-application
+├── asset-manager/  # Enterprise IT Asset Manager sub-application
+├── assets/          # Static images & graphics
+├── _headers         # Cloudflare Pages security headers configuration
+├── .gitignore       # Excluded local development files
+├── .env.example     # Environment variable documentation
+├── SECURITY.md      # Security vulnerability reporting policy
 └── README.md        # Documentation and deployment guide
 ```
 
 ---
 
-## 🚀 How to Run & Preview
+## 💻 Local Development & Testing
 
-### Option 1: Open Directly in Browser
-Double-click `index.html` or right-click $\rightarrow$ **Open with Browser** (Chrome, Edge, etc.).
+### Requirements
+- **Node.js Version**: Node.js v18+ (optional, only if using `npx serve`)
+- **Installation Command**: `None` (Pure static HTML/CSS/JS — zero dependencies to install)
 
-### Option 2: Run Local Live Server via Python
-In your Antigravity IDE terminal or PowerShell:
+### Running Locally
+Run a local static HTTP server from the root directory:
+
+**Using Python:**
 ```powershell
 python -m http.server 3000
 ```
-Then open [http://localhost:3000](http://localhost:3000).
+
+**Using Node.js:**
+```bash
+npx serve .
+```
+
+Then open `http://localhost:3000` in your browser.
 
 ---
 
-## 🌐 Free 1-Click Deployment
+## ☁️ Cloudflare Pages Deployment Guide
 
-### Deploy to Vercel
-1. Push this folder to a GitHub repository.
-2. Go to [vercel.com](https://vercel.com) $\rightarrow$ Import Repository $\rightarrow$ Deploy.
+This project is optimized for 1-click deployment on **Cloudflare Pages** via GitHub integration.
 
-### Deploy to GitHub Pages
-1. Push to GitHub.
-2. In your repo settings $\rightarrow$ **Pages** $\rightarrow$ select `main` branch $\rightarrow$ Save.
+### Deployment Configuration Settings
+
+| Setting | Value |
+|---|---|
+| **Framework Preset** | `None` (Static HTML) |
+| **Build Command** | *(Leave empty)* |
+| **Build Output Directory** | `/` (Root directory) |
+| **Node.js Version** | N/A (Static files) |
+| **Environment Variables** | *None required* |
+
+### Step-by-Step Cloudflare Pages Setup
+
+1. Log in to the [Cloudflare Dashboard](https://dash.cloudflare.com/).
+2. Navigate to **Workers & Pages** $\rightarrow$ **Create Application** $\rightarrow$ **Pages** tab.
+3. Click **Connect to Git** and select your repository (`snmn20mgf-jpg/portfolio`).
+4. Select the `main` branch.
+5. In **Build Settings**:
+   - Set **Framework Preset** to `None`.
+   - Leave **Build command** blank.
+   - Set **Build output directory** to `/`.
+6. Click **Save and Deploy**. Cloudflare Pages will automatically deploy your portfolio and apply all HTTP security headers from `_headers`.
 
 ---
 
-## 🛠️ Key Highlights Included
+## 🛡️ Security & Privacy Features
 
-- **Hero Section:** Clear value proposition bridging AEO SME operational leadership with software engineering.
-- **Projects Showcase:**
-  - **YeckFun** (Live Link to `https://yeck-fun.vercel.app/`).
-  - **AI Escalation & Case Triage Copilot** (SME workflow + AI + SQL).
-  - **Enterprise IT Asset & Database Manager** (OOP Java/C++ & SQL).
-- **Skills Bento Grid:** Java, C++, OOP logic, SQL databases, AI tooling, and leadership strengths.
-- **AEO Experience Timeline:** 3 progressive roles (Supervisor, SME, Specialist).
-- **Academic Foundation:** UNITEC B.S. in IT Administration.
-- **Interactive Features:** Dark/Light theme toggle, 1-click email copy, mobile-responsive layout.
+- **Security Headers (`_headers`)**: Enforces strict Content-Security-Policy (CSP), `X-Frame-Options: DENY`, `nosniff`, and `Referrer-Policy`.
+- **Zero Secrets**: No private credentials, API keys, or access tokens exist in the source code.
+- **DOM Sanitization**: Input fields in sub-apps use strict `escHtml()` escaping and text node binding to prevent Cross-Site Scripting (XSS).
+- **Outbound Link Protection**: All external links use `rel="noopener noreferrer"` and `referrerpolicy="no-referrer"`.

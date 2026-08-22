@@ -791,11 +791,41 @@ Example: 'I ordered 3 items on Nov 15th. The package was marked delivered but I 
       document.getElementById('priority-badge').className = `priority-badge ${p.cls}`;
       document.getElementById('priority-badge').textContent = p.label;
       document.getElementById('category-text').textContent = category;
-      document.getElementById('resolution-text').innerHTML = resolution.replace(/\n/g, '<br>');
+      
+      const resEl = document.getElementById('resolution-text');
+      resEl.textContent = '';
+      resolution.split('\n').forEach((line, i) => {
+        if (i > 0) resEl.appendChild(document.createElement('br'));
+        resEl.appendChild(document.createTextNode(line));
+      });
+
       document.getElementById('risk-notes').textContent = risk;
 
       const tagsEl = document.getElementById('policy-tags');
-      tagsEl.innerHTML = policies.map(p => `<span class="policy-tag">${p}</span>`).join('');
+      tagsEl.textContent = '';
+      policies.forEach(pol => {
+        const span = document.createElement('span');
+        span.className = 'policy-tag';
+        span.textContent = pol;
+        tagsEl.appendChild(span);
+      });
+    }
+
+    function renderEmptyLogState(tbody) {
+      tbody.textContent = '';
+      const tr = document.createElement('tr');
+      const td = document.createElement('td');
+      td.colSpan = 8;
+      const emptyDiv = document.createElement('div');
+      emptyDiv.className = 'empty-state';
+      const iconDiv = document.createElement('div');
+      iconDiv.className = 'empty-state-icon';
+      iconDiv.textContent = '📭';
+      emptyDiv.appendChild(iconDiv);
+      emptyDiv.appendChild(document.createTextNode('No cases triaged yet. Submit a case above to get started.'));
+      td.appendChild(emptyDiv);
+      tr.appendChild(td);
+      tbody.appendChild(tr);
     }
 
     function addToLog({ caseId, time, agent, channel, customerName, contactDetail, category, priority, action }) {
@@ -805,21 +835,55 @@ Example: 'I ordered 3 items on Nov 15th. The package was marked delivered but I 
       const tbody = document.getElementById('log-body');
       document.getElementById('log-count').textContent = caseLog.length;
 
-      tbody.innerHTML = caseLog.map(c => `
-        <tr>
-          <td><code style="font-family:'JetBrains Mono',monospace;font-size:12px;color:var(--accent)">${c.caseId}</code></td>
-          <td>${c.time}</td>
-          <td>${c.agent}</td>
-          <td>${c.channel}</td>
-          <td>
-            <div style="font-weight:600;color:var(--text-primary);font-size:12px;">${c.customerName || '—'}</div>
-            ${c.contactDetail ? `<div style="font-size:11px;color:var(--text-muted);margin-top:1px;">${c.contactDetail}</div>` : ''}
-          </td>
-          <td>${c.category}</td>
-          <td>${priorityLabels[c.priority] || c.priority}</td>
-          <td style="max-width:200px;white-space:nowrap;overflow:hidden;text-overflow:ellipsis;">${c.action}</td>
-        </tr>
-      `).join('');
+      if (caseLog.length === 0) {
+        renderEmptyLogState(tbody);
+        return;
+      }
+
+      tbody.textContent = '';
+      caseLog.forEach(c => {
+        const tr = document.createElement('tr');
+
+        const tdCase = document.createElement('td');
+        const code = document.createElement('code');
+        code.style.cssText = "font-family:'JetBrains Mono',monospace;font-size:12px;color:var(--accent)";
+        code.textContent = c.caseId;
+        tdCase.appendChild(code);
+
+        const tdTime = document.createElement('td');
+        tdTime.textContent = c.time;
+
+        const tdAgent = document.createElement('td');
+        tdAgent.textContent = c.agent;
+
+        const tdChannel = document.createElement('td');
+        tdChannel.textContent = c.channel;
+
+        const tdCustomer = document.createElement('td');
+        const nameDiv = document.createElement('div');
+        nameDiv.style.cssText = "font-weight:600;color:var(--text-primary);font-size:12px;";
+        nameDiv.textContent = c.customerName || '—';
+        tdCustomer.appendChild(nameDiv);
+        if (c.contactDetail) {
+          const detailDiv = document.createElement('div');
+          detailDiv.style.cssText = "font-size:11px;color:var(--text-muted);margin-top:1px;";
+          detailDiv.textContent = c.contactDetail;
+          tdCustomer.appendChild(detailDiv);
+        }
+
+        const tdCat = document.createElement('td');
+        tdCat.textContent = c.category;
+
+        const tdPrio = document.createElement('td');
+        tdPrio.textContent = priorityLabels[c.priority] || c.priority;
+
+        const tdAct = document.createElement('td');
+        tdAct.style.cssText = "max-width:200px;white-space:nowrap;overflow:hidden;text-overflow:ellipsis;";
+        tdAct.textContent = c.action;
+
+        tr.append(tdCase, tdTime, tdAgent, tdChannel, tdCustomer, tdCat, tdPrio, tdAct);
+        tbody.appendChild(tr);
+      });
     }
 
     function clearResult() {
@@ -830,13 +894,7 @@ Example: 'I ordered 3 items on Nov 15th. The package was marked delivered but I 
     function clearLog() {
       caseLog = [];
       document.getElementById('log-count').textContent = '0';
-      document.getElementById('log-body').innerHTML = `
-        <tr><td colspan="8">
-          <div class="empty-state">
-            <div class="empty-state-icon">📭</div>
-            No cases triaged yet. Submit a case above to get started.
-          </div>
-        </td></tr>`;
+      renderEmptyLogState(document.getElementById('log-body'));
     }
   </script>
 
