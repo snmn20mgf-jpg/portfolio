@@ -1,0 +1,739 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Enterprise IT Asset Manager | Leonardo Levi</title>
+  <meta name="description" content="IT Asset lifecycle management dashboard — built by Leonardo Levi Joaquin Colorado." />
+
+  <!-- Security Headers -->
+  <meta http-equiv="X-Frame-Options" content="DENY" />
+  <meta http-equiv="X-Content-Type-Options" content="nosniff" />
+  <meta name="referrer" content="strict-origin-when-cross-origin" />
+
+  <!-- Google Fonts -->
+  <link rel="preconnect" href="https://fonts.googleapis.com" crossorigin>
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet" crossorigin="anonymous">
+
+  <style>
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+    :root {
+      --bg: #f0f4f8;
+      --surface: #ffffff;
+      --surface-2: #f8fafc;
+      --border: #e2e8f0;
+      --border-2: #cbd5e1;
+      --text-primary: #0f172a;
+      --text-secondary: #475569;
+      --text-muted: #94a3b8;
+      --accent: #0ea5e9;
+      --accent-light: #e0f2fe;
+      --accent-dark: #0284c7;
+      --active-color: #10b981;
+      --active-bg: #ecfdf5;
+      --active-border: #a7f3d0;
+      --maintenance-color: #f59e0b;
+      --maintenance-bg: #fffbeb;
+      --maintenance-border: #fde68a;
+      --retired-color: #94a3b8;
+      --retired-bg: #f1f5f9;
+      --retired-border: #cbd5e1;
+      --shadow-sm: 0 1px 3px rgba(0,0,0,0.06);
+      --shadow: 0 4px 6px -1px rgba(0,0,0,0.07);
+      --shadow-lg: 0 10px 25px -5px rgba(0,0,0,0.1);
+      --radius: 16px;
+      --radius-sm: 10px;
+    }
+
+    body {
+      font-family: 'Inter', system-ui, sans-serif;
+      background: var(--bg);
+      color: var(--text-primary);
+      min-height: 100vh;
+      line-height: 1.6;
+    }
+
+    /* ── TOPBAR ── */
+    .topbar {
+      background: var(--surface);
+      border-bottom: 1px solid var(--border);
+      padding: 0 24px;
+      height: 60px;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      position: sticky;
+      top: 0;
+      z-index: 200;
+      box-shadow: var(--shadow-sm);
+    }
+    .topbar-brand {
+      display: flex; align-items: center; gap: 10px;
+      font-weight: 700; font-size: 15px; color: var(--text-primary); text-decoration: none;
+    }
+    .topbar-logo {
+      width: 32px; height: 32px;
+      background: linear-gradient(135deg, var(--accent), #38bdf8);
+      border-radius: 8px;
+      display: flex; align-items: center; justify-content: center;
+      color: white; font-size: 15px;
+    }
+    .topbar-badge {
+      font-size: 11px; font-weight: 600; padding: 3px 10px; border-radius: 100px;
+      background: var(--accent-light); color: var(--accent-dark); border: 1px solid #bae6fd;
+    }
+    .topbar-back {
+      font-size: 13px; color: var(--text-secondary); text-decoration: none;
+      display: flex; align-items: center; gap: 5px; transition: color 0.2s;
+    }
+    .topbar-back:hover { color: var(--accent); }
+
+    /* ── MAIN LAYOUT ── */
+    .wrapper {
+      max-width: 1280px;
+      margin: 0 auto;
+      padding: 28px 20px 60px;
+    }
+
+    .page-title { font-size: 24px; font-weight: 700; letter-spacing: -0.5px; }
+    .page-sub { font-size: 14px; color: var(--text-secondary); margin-top: 3px; }
+
+    /* ── STAT CARDS ── */
+    .stats-grid {
+      display: grid;
+      grid-template-columns: repeat(4, 1fr);
+      gap: 14px;
+      margin: 20px 0;
+    }
+    .stat-card {
+      background: var(--surface);
+      border: 1px solid var(--border);
+      border-radius: var(--radius);
+      padding: 16px 18px;
+      box-shadow: var(--shadow-sm);
+    }
+    .stat-label { font-size: 12px; color: var(--text-muted); font-weight: 500; margin-bottom: 4px; }
+    .stat-value { font-size: 28px; font-weight: 700; line-height: 1; color: var(--text-primary); }
+    .stat-sub { font-size: 11px; color: var(--text-muted); margin-top: 4px; }
+    .stat-dot {
+      width: 8px; height: 8px; border-radius: 50%;
+      display: inline-block; margin-right: 4px;
+    }
+
+    /* ── TOOLBAR ── */
+    .toolbar {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      flex-wrap: wrap;
+      margin-bottom: 16px;
+    }
+    .toolbar-left { display: flex; align-items: center; gap: 8px; flex: 1; flex-wrap: wrap; }
+    .toolbar-right { display: flex; align-items: center; gap: 8px; flex-shrink: 0; }
+
+    input[type="text"], select {
+      font-family: inherit;
+      font-size: 13px;
+      color: var(--text-primary);
+      background: var(--surface);
+      border: 1px solid var(--border-2);
+      border-radius: var(--radius-sm);
+      padding: 9px 13px;
+      outline: none;
+      transition: border-color 0.2s, box-shadow 0.2s;
+    }
+    input[type="text"]:focus, select:focus {
+      border-color: var(--accent);
+      box-shadow: 0 0 0 3px rgba(14,165,233,0.12);
+    }
+    #search-input { min-width: 220px; }
+
+    /* ── BUTTONS ── */
+    .btn {
+      display: inline-flex; align-items: center; justify-content: center; gap: 6px;
+      font-family: inherit; font-size: 13px; font-weight: 600;
+      padding: 9px 16px; border-radius: var(--radius-sm); border: none;
+      cursor: pointer; transition: all 0.2s; white-space: nowrap;
+    }
+    .btn-primary { background: var(--accent); color: white; }
+    .btn-primary:hover { background: var(--accent-dark); transform: translateY(-1px); box-shadow: 0 4px 12px rgba(14,165,233,0.3); }
+    .btn-outline { background: var(--surface); color: var(--text-secondary); border: 1px solid var(--border-2); }
+    .btn-outline:hover { background: var(--surface-2); color: var(--text-primary); }
+    .btn-danger { background: #fef2f2; color: #ef4444; border: 1px solid #fecaca; }
+    .btn-danger:hover { background: #fee2e2; }
+    .btn-sm { padding: 5px 10px; font-size: 12px; border-radius: 7px; }
+
+    /* ── TABLE ── */
+    .table-card {
+      background: var(--surface);
+      border: 1px solid var(--border);
+      border-radius: var(--radius);
+      box-shadow: var(--shadow-sm);
+      overflow: hidden;
+    }
+    .table-wrap { overflow-x: auto; }
+    table { width: 100%; border-collapse: collapse; font-size: 13px; }
+    th {
+      padding: 11px 14px;
+      font-size: 11px; font-weight: 600; color: var(--text-muted);
+      text-transform: uppercase; letter-spacing: 0.6px;
+      text-align: left; border-bottom: 1px solid var(--border);
+      background: var(--surface-2); white-space: nowrap;
+      cursor: pointer; user-select: none;
+    }
+    th:hover { color: var(--accent); }
+    th .sort-arrow { margin-left: 4px; opacity: 0.4; font-size: 10px; }
+    th.sorted .sort-arrow { opacity: 1; color: var(--accent); }
+    td {
+      padding: 12px 14px;
+      border-bottom: 1px solid var(--border);
+      color: var(--text-secondary);
+      vertical-align: middle;
+    }
+    tr:last-child td { border-bottom: none; }
+    tr:hover td { background: #fafbfc; }
+    .asset-name { font-weight: 600; color: var(--text-primary); }
+    .asset-id {
+      font-family: 'JetBrains Mono', monospace;
+      font-size: 11px; color: var(--text-muted);
+      background: var(--surface-2);
+      padding: 2px 6px; border-radius: 4px;
+      border: 1px solid var(--border);
+    }
+
+    /* ── STATUS BADGE ── */
+    .status-badge {
+      display: inline-flex; align-items: center; gap: 5px;
+      font-size: 11px; font-weight: 600;
+      padding: 3px 10px; border-radius: 100px;
+    }
+    .status-badge.active       { background: var(--active-bg);      color: #065f46;   border: 1px solid var(--active-border); }
+    .status-badge.maintenance  { background: var(--maintenance-bg); color: #92400e;   border: 1px solid var(--maintenance-border); }
+    .status-badge.retired      { background: var(--retired-bg);     color: var(--text-muted); border: 1px solid var(--retired-border); }
+
+    /* ── CATEGORY BADGE ── */
+    .cat-badge {
+      font-size: 11px; font-weight: 500;
+      padding: 2px 8px; border-radius: 6px;
+    }
+    .cat-software  { background: #fef3c7; color: #92400e; }
+    .cat-server    { background: #ede9fe; color: #5b21b6; }
+    .cat-other     { background: #f1f5f9; color: #475569; }
+
+    /* ── EMPTY STATE ── */
+    .empty-state {
+      text-align: center; padding: 60px 20px;
+      color: var(--text-muted); font-size: 14px;
+    }
+    .empty-icon { font-size: 40px; margin-bottom: 10px; }
+
+    /* ── TABLE FOOTER ── */
+    .table-footer {
+      padding: 12px 16px;
+      border-top: 1px solid var(--border);
+      display: flex; align-items: center; justify-content: space-between;
+      font-size: 12px; color: var(--text-muted);
+      background: var(--surface-2);
+    }
+
+    /* ── MODAL ── */
+    .modal-overlay {
+      display: none; position: fixed; inset: 0;
+      background: rgba(15,23,42,0.35); backdrop-filter: blur(4px);
+      z-index: 500; align-items: center; justify-content: center;
+      padding: 20px;
+    }
+    .modal-overlay.open { display: flex; }
+    .modal {
+      background: var(--surface);
+      border-radius: var(--radius);
+      box-shadow: var(--shadow-lg);
+      width: 100%; max-width: 520px;
+      max-height: 90vh; overflow-y: auto;
+      animation: modalIn 0.22s ease;
+    }
+    @keyframes modalIn { from { opacity:0; transform:translateY(12px) scale(0.98); } to { opacity:1; transform:none; } }
+    .modal-header {
+      padding: 20px 22px 16px;
+      border-bottom: 1px solid var(--border);
+      display: flex; align-items: center; justify-content: space-between;
+    }
+    .modal-title { font-size: 16px; font-weight: 700; }
+    .modal-close {
+      width: 30px; height: 30px; border-radius: 8px; border: none;
+      background: var(--surface-2); cursor: pointer; font-size: 16px;
+      display: flex; align-items: center; justify-content: center;
+      color: var(--text-muted); transition: background 0.15s;
+    }
+    .modal-close:hover { background: var(--border); color: var(--text-primary); }
+    .modal-body { padding: 22px; }
+    .modal-footer {
+      padding: 16px 22px;
+      border-top: 1px solid var(--border);
+      display: flex; gap: 10px; justify-content: flex-end;
+    }
+
+    .form-group { margin-bottom: 16px; }
+    .form-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 14px; }
+    label.form-label {
+      display: block; font-size: 12px; font-weight: 600;
+      color: var(--text-secondary); margin-bottom: 5px; text-transform: uppercase; letter-spacing: 0.5px;
+    }
+    input.form-input, select.form-select, textarea.form-textarea {
+      width: 100%; font-family: inherit; font-size: 13.5px;
+      color: var(--text-primary); background: var(--surface-2);
+      border: 1px solid var(--border-2); border-radius: var(--radius-sm);
+      padding: 9px 12px; outline: none; transition: border-color 0.2s, box-shadow 0.2s;
+    }
+    input.form-input:focus, select.form-select:focus, textarea.form-textarea:focus {
+      border-color: var(--accent); box-shadow: 0 0 0 3px rgba(14,165,233,0.1);
+    }
+    textarea.form-textarea { resize: vertical; min-height: 70px; }
+
+    /* ── TOAST ── */
+    .toast {
+      position: fixed; bottom: 24px; right: 24px;
+      background: var(--text-primary); color: white;
+      font-size: 13px; font-weight: 500;
+      padding: 12px 18px; border-radius: var(--radius-sm);
+      box-shadow: var(--shadow-lg);
+      z-index: 1000;
+      transform: translateY(80px); opacity: 0;
+      transition: all 0.3s cubic-bezier(0.16, 1, 0.3, 1);
+    }
+    .toast.show { transform: translateY(0); opacity: 1; }
+
+    /* ── RESPONSIVE ── */
+    @media (max-width: 900px) {
+      .stats-grid { grid-template-columns: 1fr 1fr; }
+    }
+    @media (max-width: 580px) {
+      .stats-grid { grid-template-columns: 1fr 1fr; }
+      .form-grid { grid-template-columns: 1fr; }
+      .toolbar-right { width: 100%; }
+    }
+  </style>
+</head>
+<body>
+
+  <!-- TOPBAR -->
+  <nav class="topbar">
+    <a href="#" class="topbar-brand">
+      <div class="topbar-logo" style="background: linear-gradient(135deg, #1e3a5f, #1d4ed8);">
+        <svg width="17" height="17" viewBox="0 0 24 24" fill="none">
+          <rect x="7" y="7" width="10" height="10" rx="1.5" stroke="white" stroke-width="1.5"/>
+          <rect x="9.5" y="9.5" width="5" height="5" fill="white"/>
+          <line x1="9" y1="4" x2="9" y2="7" stroke="white" stroke-width="1.5" stroke-linecap="round"/>
+          <line x1="12" y1="4" x2="12" y2="7" stroke="white" stroke-width="1.5" stroke-linecap="round"/>
+          <line x1="15" y1="4" x2="15" y2="7" stroke="white" stroke-width="1.5" stroke-linecap="round"/>
+          <line x1="9" y1="17" x2="9" y2="20" stroke="white" stroke-width="1.5" stroke-linecap="round"/>
+          <line x1="12" y1="17" x2="12" y2="20" stroke="white" stroke-width="1.5" stroke-linecap="round"/>
+          <line x1="15" y1="17" x2="15" y2="20" stroke="white" stroke-width="1.5" stroke-linecap="round"/>
+          <line x1="4" y1="9" x2="7" y2="9" stroke="white" stroke-width="1.5" stroke-linecap="round"/>
+          <line x1="4" y1="12" x2="7" y2="12" stroke="white" stroke-width="1.5" stroke-linecap="round"/>
+          <line x1="4" y1="15" x2="7" y2="15" stroke="white" stroke-width="1.5" stroke-linecap="round"/>
+          <line x1="17" y1="9" x2="20" y2="9" stroke="white" stroke-width="1.5" stroke-linecap="round"/>
+          <line x1="17" y1="12" x2="20" y2="12" stroke="white" stroke-width="1.5" stroke-linecap="round"/>
+          <line x1="17" y1="15" x2="20" y2="15" stroke="white" stroke-width="1.5" stroke-linecap="round"/>
+        </svg>
+      </div>
+      <span>IT Asset Manager</span>
+    </a>
+    <div style="display:flex;align-items:center;gap:12px;">
+      <span class="topbar-badge">Database v1.0</span>
+      <a href="../index.html" class="topbar-back">← Portfolio</a>
+    </div>
+  </nav>
+
+  <div class="wrapper">
+
+    <!-- HEADER -->
+    <div style="margin-bottom:4px;">
+      <h1 class="page-title">Enterprise IT Asset Inventory</h1>
+      <p class="page-sub">Track, manage, and audit all software licenses and server infrastructure assets.</p>
+    </div>
+
+    <!-- STATS -->
+    <div class="stats-grid">
+      <div class="stat-card">
+        <div class="stat-label">Total Assets</div>
+        <div class="stat-value" id="stat-total">0</div>
+        <div class="stat-sub">All registered items</div>
+      </div>
+      <div class="stat-card">
+        <div class="stat-label">Active</div>
+        <div class="stat-value" id="stat-active" style="color:var(--active-color)">0</div>
+        <div class="stat-sub"><span class="stat-dot" style="background:var(--active-color)"></span>Operational</div>
+      </div>
+      <div class="stat-card">
+        <div class="stat-label">In Maintenance</div>
+        <div class="stat-value" id="stat-maintenance" style="color:var(--maintenance-color)">0</div>
+        <div class="stat-sub"><span class="stat-dot" style="background:var(--maintenance-color)"></span>Under review</div>
+      </div>
+      <div class="stat-card">
+        <div class="stat-label">Retired</div>
+        <div class="stat-value" id="stat-retired" style="color:var(--retired-color)">0</div>
+        <div class="stat-sub"><span class="stat-dot" style="background:var(--retired-color)"></span>Decommissioned</div>
+      </div>
+    </div>
+
+    <!-- TOOLBAR -->
+    <div class="toolbar">
+      <div class="toolbar-left">
+        <input type="text" id="search-input" placeholder="🔍 Search assets..." oninput="renderTable()" />
+        <select id="filter-type" onchange="renderTable()">
+          <option value="">All Categories</option>
+          <option value="Software License">Software License</option>
+          <option value="Server / Infrastructure">Server / Infrastructure</option>
+        </select>
+        <select id="filter-status" onchange="renderTable()">
+          <option value="">All Statuses</option>
+          <option value="Active">Active</option>
+          <option value="Maintenance">Maintenance</option>
+          <option value="Retired">Retired</option>
+        </select>
+      </div>
+      <div class="toolbar-right">
+        <button class="btn btn-outline" onclick="exportCSV()">⬇️ Export CSV</button>
+        <button class="btn btn-primary" onclick="openModal()">+ Add Asset</button>
+      </div>
+    </div>
+
+    <!-- TABLE -->
+    <div class="table-card">
+      <div class="table-wrap">
+        <table>
+          <thead>
+            <tr>
+              <th onclick="sortBy('id')">Asset ID <span class="sort-arrow">↕</span></th>
+              <th onclick="sortBy('name')">Asset Name <span class="sort-arrow">↕</span></th>
+              <th onclick="sortBy('type')">Category <span class="sort-arrow">↕</span></th>
+              <th onclick="sortBy('status')">Status <span class="sort-arrow">↕</span></th>
+              <th onclick="sortBy('assignedTo')">Assigned To <span class="sort-arrow">↕</span></th>
+              <th onclick="sortBy('location')">Location <span class="sort-arrow">↕</span></th>
+              <th onclick="sortBy('date')">Date Added <span class="sort-arrow">↕</span></th>
+              <th>Notes</th>
+              <th>Actions</th>
+            </tr>
+          </thead>
+          <tbody id="table-body"></tbody>
+        </table>
+      </div>
+      <div class="table-footer">
+        <span id="table-count">0 assets</span>
+        <span>Data stored in localStorage — persists between visits</span>
+      </div>
+    </div>
+
+  </div>
+
+  <!-- ADD / EDIT MODAL -->
+  <div class="modal-overlay" id="modal-overlay">
+    <div class="modal">
+      <div class="modal-header">
+        <div class="modal-title" id="modal-title">Add New Asset</div>
+        <button class="modal-close" onclick="closeModal()">✕</button>
+      </div>
+      <div class="modal-body">
+        <input type="hidden" id="edit-id" />
+        <div class="form-grid">
+          <div class="form-group">
+            <label class="form-label">Asset Name *</label>
+            <input class="form-input" id="f-name" type="text" placeholder="e.g. Adobe Creative Cloud" />
+          </div>
+          <div class="form-group">
+            <label class="form-label">Category *</label>
+            <select class="form-select" id="f-type">
+              <option value="Software License">Software License</option>
+              <option value="Server / Infrastructure">Server / Infrastructure</option>
+            </select>
+          </div>
+          <div class="form-group">
+            <label class="form-label">Status</label>
+            <select class="form-select" id="f-status">
+              <option value="Active">Active</option>
+              <option value="Maintenance">Maintenance</option>
+              <option value="Retired">Retired</option>
+            </select>
+          </div>
+          <div class="form-group">
+            <label class="form-label">Assigned To</label>
+            <input class="form-input" id="f-assignedTo" type="text" placeholder="Team or person name" />
+          </div>
+          <div class="form-group">
+            <label class="form-label">Location / Environment</label>
+            <input class="form-input" id="f-location" type="text" placeholder="e.g. HQ / Cloud / AWS" />
+          </div>
+          <div class="form-group">
+            <label class="form-label">Serial / License Key</label>
+            <input class="form-input" id="f-serial" type="text" placeholder="Optional — internal ref" />
+          </div>
+        </div>
+        <div class="form-group">
+          <label class="form-label">Notes</label>
+          <textarea class="form-textarea" id="f-notes" placeholder="Renewal date, version, specs, or other details..."></textarea>
+        </div>
+      </div>
+      <div class="modal-footer">
+        <button class="btn btn-outline" onclick="closeModal()">Cancel</button>
+        <button class="btn btn-primary" onclick="saveAsset()">💾 Save Asset</button>
+      </div>
+    </div>
+  </div>
+
+  <!-- TOAST -->
+  <div class="toast" id="toast"></div>
+
+  <script>
+    // ── DATA STORE ────────────────────────────────────────────────────────────
+
+    const STORAGE_KEY = 'it_assets_v1';
+    let assets = [];
+    let sortField = 'date';
+    let sortAsc = false;
+    let editingId = null;
+
+    function loadAssets() {
+      try {
+        assets = JSON.parse(localStorage.getItem(STORAGE_KEY)) || [];
+      } catch { assets = []; }
+      if (assets.length === 0) seedDefaults();
+    }
+
+    function saveAssets() {
+      localStorage.setItem(STORAGE_KEY, JSON.stringify(assets));
+    }
+
+    function seedDefaults() {
+      const now = new Date();
+      const fmt = (d) => d.toISOString().split('T')[0];
+      const past = (days) => { const d = new Date(now); d.setDate(d.getDate() - days); return fmt(d); };
+
+      assets = [
+        { id: genId(), name: 'Microsoft 365 Business', type: 'Software License', status: 'Active', assignedTo: 'All Staff', location: 'Cloud', serial: 'MS365-2024-ENT', notes: 'Annual renewal — expires Dec 2026', date: past(180) },
+        { id: genId(), name: 'Adobe Creative Cloud', type: 'Software License', status: 'Active', assignedTo: 'Design Team', location: 'Cloud', serial: 'ADO-CC-PRO-044', notes: '5 seats, monthly billed', date: past(90) },
+        { id: genId(), name: 'Primary Web Server (PROD)', type: 'Server / Infrastructure', status: 'Active', assignedTo: 'DevOps', location: 'AWS us-east-1', serial: 'i-0a1b2c3d4e5f', notes: 'Ubuntu 22.04 LTS — t3.medium', date: past(365) },
+        { id: genId(), name: 'Backup DB Server', type: 'Server / Infrastructure', status: 'Maintenance', assignedTo: 'DBA Team', location: 'On-Premise / HQ', serial: 'SRV-DB-002', notes: 'Scheduled maintenance — disk expansion in progress', date: past(200) },
+        { id: genId(), name: 'Slack Enterprise License', type: 'Software License', status: 'Active', assignedTo: 'All Staff', location: 'Cloud', serial: 'SLK-ENT-2024', notes: '50-user plan, renews June 2026', date: past(120) },
+        { id: genId(), name: 'Legacy Mail Server', type: 'Server / Infrastructure', status: 'Retired', assignedTo: 'N/A', location: 'HQ Rack B2', serial: 'SRV-MAIL-001', notes: 'Replaced by Microsoft Exchange Online. Decommissioned Jan 2025.', date: past(500) },
+      ];
+      saveAssets();
+    }
+
+    function genId() {
+      return 'AST-' + Date.now().toString(36).toUpperCase() + Math.random().toString(36).substring(2, 5).toUpperCase();
+    }
+
+    // ── RENDER ────────────────────────────────────────────────────────────────
+
+    function getFiltered() {
+      const q     = document.getElementById('search-input').value.toLowerCase();
+      const type  = document.getElementById('filter-type').value;
+      const status = document.getElementById('filter-status').value;
+
+      return assets
+        .filter(a => {
+          const match = !q || [a.name, a.type, a.assignedTo, a.location, a.serial, a.notes, a.id]
+            .some(v => v && v.toLowerCase().includes(q));
+          const typeOk   = !type   || a.type === type;
+          const statusOk = !status || a.status === status;
+          return match && typeOk && statusOk;
+        })
+        .sort((a, b) => {
+          const va = (a[sortField] || '').toString().toLowerCase();
+          const vb = (b[sortField] || '').toString().toLowerCase();
+          return sortAsc ? va.localeCompare(vb) : vb.localeCompare(va);
+        });
+    }
+
+    function renderStats() {
+      document.getElementById('stat-total').textContent       = assets.length;
+      document.getElementById('stat-active').textContent      = assets.filter(a => a.status === 'Active').length;
+      document.getElementById('stat-maintenance').textContent = assets.filter(a => a.status === 'Maintenance').length;
+      document.getElementById('stat-retired').textContent     = assets.filter(a => a.status === 'Retired').length;
+    }
+
+    function statusBadge(s) {
+      const cls = s === 'Active' ? 'active' : s === 'Maintenance' ? 'maintenance' : 'retired';
+      const dot = s === 'Active' ? '🟢' : s === 'Maintenance' ? '🟡' : '⚫';
+      return `<span class="status-badge ${cls}">${dot} ${s}</span>`;
+    }
+
+    function catBadge(t) {
+      const cls = t === 'Software License' ? 'cat-software' : t === 'Server / Infrastructure' ? 'cat-server' : 'cat-other';
+      const icon = t === 'Software License' ? '📦' : '🖥️';
+      return `<span class="cat-badge ${cls}">${icon} ${t}</span>`;
+    }
+
+    function renderTable() {
+      const filtered = getFiltered();
+      const tbody = document.getElementById('table-body');
+      document.getElementById('table-count').textContent = `${filtered.length} asset${filtered.length !== 1 ? 's' : ''}`;
+
+      if (filtered.length === 0) {
+        tbody.innerHTML = `<tr><td colspan="9"><div class="empty-state">
+          <div class="empty-icon">📭</div>
+          <div>No assets found. Try adjusting your filters or <strong>add a new asset</strong>.</div>
+        </div></td></tr>`;
+        return;
+      }
+
+      tbody.innerHTML = filtered.map(a => `
+        <tr>
+          <td><span class="asset-id">${a.id}</span></td>
+          <td><span class="asset-name">${escHtml(a.name)}</span></td>
+          <td>${catBadge(a.type)}</td>
+          <td>${statusBadge(a.status)}</td>
+          <td>${escHtml(a.assignedTo || '—')}</td>
+          <td>${escHtml(a.location || '—')}</td>
+          <td>${a.date || '—'}</td>
+          <td style="max-width:180px;white-space:nowrap;overflow:hidden;text-overflow:ellipsis;color:var(--text-muted);" title="${escHtml(a.notes || '')}">${escHtml(a.notes || '—')}</td>
+          <td>
+            <div style="display:flex;gap:5px;">
+              <button class="btn btn-outline btn-sm" onclick="editAsset('${a.id}')">✏️ Edit</button>
+              <button class="btn btn-danger btn-sm" onclick="deleteAsset('${a.id}')">🗑️</button>
+            </div>
+          </td>
+        </tr>
+      `).join('');
+
+      renderStats();
+    }
+
+    function escHtml(str) {
+      if (!str) return '';
+      return str.replace(/&/g,'&amp;').replace(/</g,'&lt;').replace(/>/g,'&gt;').replace(/"/g,'&quot;');
+    }
+
+    // ── SORTING ───────────────────────────────────────────────────────────────
+
+    function sortBy(field) {
+      if (sortField === field) sortAsc = !sortAsc;
+      else { sortField = field; sortAsc = true; }
+      document.querySelectorAll('th').forEach(th => th.classList.remove('sorted'));
+      renderTable();
+    }
+
+    // ── MODAL ─────────────────────────────────────────────────────────────────
+
+    function openModal(id = null) {
+      editingId = id;
+      document.getElementById('modal-title').textContent = id ? 'Edit Asset' : 'Add New Asset';
+      document.getElementById('modal-overlay').classList.add('open');
+
+      if (id) {
+        const a = assets.find(x => x.id === id);
+        if (a) {
+          document.getElementById('f-name').value       = a.name || '';
+          document.getElementById('f-type').value       = a.type || 'Software License';
+          document.getElementById('f-status').value     = a.status || 'Active';
+          document.getElementById('f-assignedTo').value = a.assignedTo || '';
+          document.getElementById('f-location').value   = a.location || '';
+          document.getElementById('f-serial').value     = a.serial || '';
+          document.getElementById('f-notes').value      = a.notes || '';
+        }
+      } else {
+        ['f-name','f-assignedTo','f-location','f-serial','f-notes'].forEach(id => document.getElementById(id).value = '');
+        document.getElementById('f-type').value   = 'Software License';
+        document.getElementById('f-status').value = 'Active';
+      }
+    }
+
+    function closeModal() {
+      document.getElementById('modal-overlay').classList.remove('open');
+      editingId = null;
+    }
+
+    function editAsset(id) { openModal(id); }
+
+    function saveAsset() {
+      const name = document.getElementById('f-name').value.trim();
+      if (!name) {
+        document.getElementById('f-name').focus();
+        document.getElementById('f-name').style.borderColor = '#ef4444';
+        setTimeout(() => document.getElementById('f-name').style.borderColor = '', 2000);
+        return;
+      }
+
+      const data = {
+        name,
+        type:       document.getElementById('f-type').value,
+        status:     document.getElementById('f-status').value,
+        assignedTo: document.getElementById('f-assignedTo').value.trim(),
+        location:   document.getElementById('f-location').value.trim(),
+        serial:     document.getElementById('f-serial').value.trim(),
+        notes:      document.getElementById('f-notes').value.trim(),
+        date:       new Date().toISOString().split('T')[0],
+      };
+
+      if (editingId) {
+        const idx = assets.findIndex(a => a.id === editingId);
+        if (idx !== -1) { assets[idx] = { ...assets[idx], ...data }; }
+        showToast('✅ Asset updated successfully');
+      } else {
+        assets.unshift({ id: genId(), ...data });
+        showToast('✅ Asset added successfully');
+      }
+
+      saveAssets();
+      renderTable();
+      closeModal();
+    }
+
+    function deleteAsset(id) {
+      const a = assets.find(x => x.id === id);
+      if (!a) return;
+      if (!confirm(`Delete "${a.name}"? This action cannot be undone.`)) return;
+      assets = assets.filter(x => x.id !== id);
+      saveAssets();
+      renderTable();
+      showToast('🗑️ Asset deleted');
+    }
+
+    // ── EXPORT CSV ────────────────────────────────────────────────────────────
+
+    function exportCSV() {
+      const headers = ['Asset ID','Name','Category','Status','Assigned To','Location','Serial / License','Notes','Date Added'];
+      const rows = assets.map(a => [
+        a.id, a.name, a.type, a.status, a.assignedTo, a.location, a.serial, a.notes, a.date
+      ].map(v => `"${(v || '').replace(/"/g, '""')}"`));
+
+      const csv = [headers.join(','), ...rows.map(r => r.join(','))].join('\n');
+      const blob = new Blob([csv], { type: 'text/csv;charset=utf-8;' });
+      const url = URL.createObjectURL(blob);
+      const link = document.createElement('a');
+      link.href = url;
+      link.download = `it-assets-${new Date().toISOString().split('T')[0]}.csv`;
+      link.click();
+      URL.revokeObjectURL(url);
+      showToast('⬇️ CSV export downloaded');
+    }
+
+    // ── TOAST ─────────────────────────────────────────────────────────────────
+
+    function showToast(msg) {
+      const toast = document.getElementById('toast');
+      toast.textContent = msg;
+      toast.classList.add('show');
+      setTimeout(() => toast.classList.remove('show'), 2800);
+    }
+
+    // ── MODAL CLOSE ON OVERLAY CLICK ──────────────────────────────────────────
+
+    document.getElementById('modal-overlay').addEventListener('click', function(e) {
+      if (e.target === this) closeModal();
+    });
+
+    // ── KEYBOARD SHORTCUT ─────────────────────────────────────────────────────
+    document.addEventListener('keydown', e => {
+      if (e.key === 'Escape') closeModal();
+    });
+
+    // ── INIT ──────────────────────────────────────────────────────────────────
+    loadAssets();
+    renderTable();
+  </script>
+</body>
+</html>

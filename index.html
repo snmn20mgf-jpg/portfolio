@@ -1,0 +1,686 @@
+<!DOCTYPE html>
+<html lang="en" class="scroll-smooth">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Leonardo Levi Joaquin Colorado | Software & IT Solutions Specialist</title>
+  <meta name="description" content="Portfolio of Leonardo Levi Joaquin Colorado — Software Developer, IT Administration Specialist, and Former AEO SME & Supervisor." />
+  
+  <!-- Security Meta Tags -->
+  <meta http-equiv="Content-Security-Policy" content="default-src 'self'; script-src 'self' 'unsafe-inline' https://cdn.tailwindcss.com https://unpkg.com; style-src 'self' 'unsafe-inline' https://fonts.googleapis.com; font-src https://fonts.gstatic.com; img-src 'self' data:;">
+  <meta http-equiv="X-Frame-Options" content="DENY" />
+  <meta http-equiv="X-Content-Type-Options" content="nosniff" />
+  <meta name="referrer" content="strict-origin-when-cross-origin" />
+
+  <!-- Google Fonts: Plus Jakarta Sans & JetBrains Mono -->
+  <link rel="preconnect" href="https://fonts.googleapis.com" crossorigin>
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@400;500;600&family=Plus+Jakarta+Sans:wght@300;400;500;600;700;800&display=swap" rel="stylesheet" crossorigin="anonymous">
+  
+  <!-- Tailwind CSS via CDN -->
+  <script src="https://cdn.tailwindcss.com"></script>
+  <script>
+    tailwind.config = {
+      darkMode: 'class',
+      theme: {
+        extend: {
+          fontFamily: {
+            sans: ['"Plus Jakarta Sans"', 'sans-serif'],
+            mono: ['"JetBrains Mono"', 'monospace'],
+          },
+          colors: {
+            brand: {
+              50: '#ecfdf5',
+              100: '#d1fae5',
+              200: '#a7f3d0',
+              300: '#6ee7b7',
+              400: '#34d399',
+              500: '#10b981',
+              600: '#059669',
+              700: '#047857',
+              800: '#065f46',
+              900: '#064e3b',
+            }
+          }
+        }
+      }
+    }
+  </script>
+
+  <!-- Lucide Icons — pinned to v1.33.0 for stability and security -->
+  <!-- SRI hash ensures the file has not been tampered with on the CDN -->
+  <script
+    src="https://unpkg.com/lucide@1.33.0/dist/umd/lucide.min.js"
+    integrity="sha384-tCQ4YYVYKuOFYH+pnSIPOS3PaT3+5AmX2okMauzDJlLLxkQfJfSwmgpZPceZWs1F"
+    crossorigin="anonymous"></script>
+
+  <style>
+    /* Custom subtle glassmorphism and animations */
+    .glass-nav {
+      backdrop-filter: blur(12px);
+      -webkit-backdrop-filter: blur(12px);
+    }
+    .card-hover {
+      transition: all 0.3s cubic-bezier(0.16, 1, 0.3, 1);
+    }
+    .card-hover:hover {
+      transform: translateY(-4px);
+      box-shadow: 0 20px 25px -5px rgba(0, 0, 0, 0.05), 0 8px 10px -6px rgba(0, 0, 0, 0.03);
+    }
+  </style>
+</head>
+<body class="bg-slate-50 text-slate-800 font-sans antialiased selection:bg-brand-500 selection:text-white transition-colors duration-300 dark:bg-slate-950 dark:text-slate-100">
+
+  <!-- TOP ANNOUNCEMENT BAR -->
+  <div class="bg-brand-50 border-b border-brand-200/60 py-2 px-4 text-center text-xs font-medium text-brand-800 dark:bg-brand-950/40 dark:border-brand-800/40 dark:text-brand-300">
+    <div class="max-w-6xl mx-auto flex items-center justify-center gap-2">
+      <span class="relative flex h-2 w-2">
+        <span class="animate-ping absolute inline-flex h-full w-full rounded-full bg-brand-400 opacity-75"></span>
+        <span class="relative inline-flex rounded-full h-2 w-2 bg-brand-500"></span>
+      </span>
+      <span>Open to Software Engineering, AI Solutions & IT Administration Roles • Bilingual (EN/ES)</span>
+    </div>
+  </div>
+
+  <!-- NAVIGATION -->
+  <header class="sticky top-0 z-50 bg-white/80 border-b border-slate-200/80 glass-nav dark:bg-slate-900/80 dark:border-slate-800">
+    <div class="max-w-6xl mx-auto px-4 sm:px-6 h-16 flex items-center justify-between">
+      <a href="#hero" class="flex items-center gap-2.5 font-bold text-slate-900 dark:text-white tracking-tight text-lg group">
+        <div class="w-9 h-9 rounded-xl bg-gradient-to-tr from-brand-600 to-brand-400 flex items-center justify-center text-white font-mono font-bold shadow-sm shadow-brand-500/20 group-hover:scale-105 transition-transform">
+          LL
+        </div>
+        <span>Leonardo Levi<span class="text-brand-600">.</span></span>
+      </a>
+
+      <!-- Desktop Nav -->
+      <nav class="hidden md:flex items-center gap-8 text-sm font-medium text-slate-600 dark:text-slate-300">
+        <a href="#about" class="hover:text-brand-600 transition-colors">About</a>
+        <a href="#skills" class="hover:text-brand-600 transition-colors">Skills</a>
+        <a href="#projects" class="hover:text-brand-600 transition-colors">Projects</a>
+        <a href="#experience" class="hover:text-brand-600 transition-colors">Experience</a>
+        <a href="#education" class="hover:text-brand-600 transition-colors">Education</a>
+      </nav>
+
+      <!-- Actions -->
+      <div class="flex items-center gap-3">
+        <button id="theme-toggle" class="p-2 rounded-xl border border-slate-200 text-slate-600 hover:bg-slate-100 dark:border-slate-800 dark:text-slate-300 dark:hover:bg-slate-800 transition-colors" title="Toggle Theme">
+          <i data-lucide="moon" class="w-4 h-4 hidden dark:block"></i>
+          <i data-lucide="sun" class="w-4 h-4 block dark:hidden"></i>
+        </button>
+
+        <a href="#contact" class="inline-flex items-center gap-1.5 px-4 py-2 rounded-xl bg-brand-600 hover:bg-brand-700 text-white text-xs sm:text-sm font-semibold shadow-sm shadow-brand-600/20 transition-all hover:shadow-md">
+          <i data-lucide="mail" class="w-4 h-4"></i>
+          <span>Get in Touch</span>
+        </a>
+      </div>
+    </div>
+  </header>
+
+  <main class="max-w-6xl mx-auto px-4 sm:px-6 py-12 sm:py-16 space-y-24">
+
+    <!-- HERO SECTION -->
+    <section id="hero" class="pt-6 sm:pt-10">
+      <div class="grid grid-cols-1 lg:grid-cols-12 gap-12 items-center">
+        <div class="lg:col-span-7 space-y-6">
+          <div class="inline-flex items-center gap-2 px-3 py-1.5 rounded-full bg-brand-50 border border-brand-200 text-brand-700 text-xs font-semibold dark:bg-brand-950/50 dark:border-brand-800 dark:text-brand-300">
+            <i data-lucide="sparkles" class="w-3.5 h-3.5 text-brand-600"></i>
+            <span>Software Developer & IT Solutions Specialist</span>
+          </div>
+
+          <h1 class="text-4xl sm:text-5xl lg:text-6xl font-extrabold text-slate-900 dark:text-white tracking-tight leading-[1.15]">
+            Bridging operational logic with <span class="text-transparent bg-clip-text bg-gradient-to-r from-brand-600 to-teal-500">intelligent software</span>.
+          </h1>
+
+          <p class="text-base sm:text-lg text-slate-600 dark:text-slate-300 leading-relaxed max-w-2xl">
+            Hi, I’m <strong>Leonardo Levi Joaquin Colorado</strong>. I combine <strong>4+ years of high-stakes operational leadership & SME problem-solving</strong> for American Eagle Outfitters with a strong foundation in <strong>OOP (Java, C++), SQL databases, and AI-driven development</strong>.
+          </p>
+
+          <div class="flex flex-wrap items-center gap-3 pt-2">
+            <a href="#projects" class="inline-flex items-center gap-2 px-5 py-3 rounded-xl bg-slate-900 hover:bg-slate-800 text-white text-sm font-semibold shadow-sm transition-all hover:-translate-y-0.5 dark:bg-brand-600 dark:hover:bg-brand-700">
+              <span>View Featured Projects</span>
+              <i data-lucide="arrow-right" class="w-4 h-4"></i>
+            </a>
+            
+            <a href="https://www.linkedin.com/in/leonardo-levi-joaquin-colorado-946128219/" target="_blank" rel="noopener noreferrer" referrerpolicy="no-referrer" class="inline-flex items-center gap-2 px-5 py-3 rounded-xl border border-slate-200 bg-white hover:bg-slate-50 text-slate-800 text-sm font-semibold shadow-sm transition-all hover:-translate-y-0.5 dark:border-slate-800 dark:bg-slate-900 dark:text-slate-200 dark:hover:bg-slate-800">
+              <i data-lucide="linkedin" class="w-4 h-4 text-[#0077B5]"></i>
+              <span>LinkedIn Profile</span>
+            </a>
+
+            <button onclick="copyContact('coloradolevi10@gmail.com', this)" class="inline-flex items-center gap-2 px-4 py-3 rounded-xl border border-slate-200 bg-white hover:bg-slate-50 text-slate-700 text-sm font-medium transition-all dark:border-slate-800 dark:bg-slate-900 dark:text-slate-300 dark:hover:bg-slate-800">
+              <i data-lucide="copy" class="w-4 h-4"></i>
+              <span id="copy-email-text">Copy Email</span>
+            </button>
+          </div>
+
+          <!-- Quick Metric Badges -->
+          <div class="grid grid-cols-3 gap-4 pt-6 border-t border-slate-200/80 dark:border-slate-800">
+            <div>
+              <div class="text-2xl font-bold text-slate-900 dark:text-white">4+ Yrs</div>
+              <div class="text-xs text-slate-500 dark:text-slate-400">AEO Operations & SME</div>
+            </div>
+            <div>
+              <div class="text-2xl font-bold text-brand-600">70%+</div>
+              <div class="text-xs text-slate-500 dark:text-slate-400">IT Admin Degree (UNITEC)</div>
+            </div>
+            <div>
+              <div class="text-2xl font-bold text-slate-900 dark:text-white">Bilingual</div>
+              <div class="text-xs text-slate-500 dark:text-slate-400">Professional English & Spanish</div>
+            </div>
+          </div>
+        </div>
+
+        <!-- HERO RIGHT CARD (Interactive Terminal / Snapshot) -->
+        <div class="lg:col-span-5">
+          <div class="bg-white rounded-3xl border border-slate-200/80 p-6 shadow-sm dark:bg-slate-900 dark:border-slate-800 relative overflow-hidden card-hover">
+            <div class="absolute -right-16 -top-16 w-48 h-48 bg-brand-500/10 rounded-full blur-3xl pointer-events-none"></div>
+
+            <div class="flex items-center justify-between pb-4 border-b border-slate-100 dark:border-slate-800">
+              <div class="flex items-center gap-2">
+                <span class="w-3 h-3 rounded-full bg-rose-400"></span>
+                <span class="w-3 h-3 rounded-full bg-amber-400"></span>
+                <span class="w-3 h-3 rounded-full bg-emerald-400"></span>
+              </div>
+              <span class="text-xs font-mono text-slate-400 dark:text-slate-500">profile.config.ts</span>
+            </div>
+
+            <div class="py-4 space-y-3 font-mono text-xs text-slate-700 dark:text-slate-300">
+              <p><span class="text-purple-600 dark:text-purple-400">const</span> <span class="text-blue-600 dark:text-blue-400">candidate</span> = {</p>
+              <p class="pl-4"><span class="text-slate-500 dark:text-slate-400">name:</span> <span class="text-brand-600">"Leonardo Levi Joaquin Colorado"</span>,</p>
+              <p class="pl-4"><span class="text-slate-500 dark:text-slate-400">focus:</span> [<span class="text-amber-600">"AI-Assisted Dev"</span>, <span class="text-amber-600">"Java/OOP"</span>, <span class="text-amber-600">"SQL Databases"</span>],</p>
+              <p class="pl-4"><span class="text-slate-500 dark:text-slate-400">degree:</span> <span class="text-brand-600">"B.S. IT Administration (UNITEC)"</span>,</p>
+              <p class="pl-4"><span class="text-slate-500 dark:text-slate-400">strengths:</span> [<span class="text-teal-600">"Critical Thinking"</span>, <span class="text-teal-600">"Escalation SME"</span>, <span class="text-teal-600">"Team Leadership"</span>],</p>
+              <p class="pl-4"><span class="text-slate-500 dark:text-slate-400">status:</span> <span class="text-emerald-500 font-semibold">"Ready to Build & Scale"</span></p>
+              <p>};</p>
+            </div>
+
+            <div class="mt-4 pt-4 border-t border-slate-100 dark:border-slate-800 flex items-center justify-between text-xs">
+              <span class="text-slate-500">Location: Mexico (Remote / Hybrid)</span>
+              <span class="inline-flex items-center gap-1 font-semibold text-brand-600">
+                <i data-lucide="check-circle-2" class="w-3.5 h-3.5"></i> Active
+              </span>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- SECTION: FEATURED PROJECTS -->
+    <section id="projects" class="space-y-8">
+      <div class="flex flex-col md:flex-row md:items-end justify-between gap-4">
+        <div>
+          <div class="inline-flex items-center gap-1.5 text-xs font-semibold tracking-wider uppercase text-brand-600 font-mono mb-2">
+            <i data-lucide="code" class="w-4 h-4"></i>
+            Portfolio & Proof of Work
+          </div>
+          <h2 class="text-3xl font-bold text-slate-900 dark:text-white tracking-tight">Featured Projects</h2>
+        </div>
+        <p class="text-sm text-slate-500 dark:text-slate-400 max-w-md">
+          A showcase of real-world web applications, algorithmic programming, and database architecture.
+        </p>
+      </div>
+
+      <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+
+        <!-- PROJECT 1: YECKFUN (LIVE) -->
+        <div class="bg-white rounded-3xl border border-slate-200/80 overflow-hidden shadow-sm dark:bg-slate-900 dark:border-slate-800 flex flex-col card-hover">
+          <div class="relative bg-gradient-to-br from-purple-500/10 via-slate-100 to-brand-50 p-6 border-b border-slate-200/60 dark:from-purple-950/40 dark:via-slate-800/40 dark:to-slate-900">
+            <div class="flex items-center justify-between mb-4">
+              <span class="inline-flex items-center gap-1.5 px-2.5 py-1 rounded-full bg-brand-100 text-brand-800 text-xs font-bold dark:bg-brand-900/60 dark:text-brand-300">
+                <i data-lucide="globe" class="w-3 h-3"></i> Live Web App
+              </span>
+              <span class="text-xs font-mono text-slate-500">Next.js · Vercel</span>
+            </div>
+            <h3 class="text-xl font-bold text-slate-900 dark:text-white">YeckFun</h3>
+            <p class="text-xs text-slate-600 dark:text-slate-300 mt-1">Smart Event Planning & Risk/Cost Assessment Platform</p>
+          </div>
+
+          <div class="p-6 flex-1 flex flex-col justify-between space-y-4">
+            <p class="text-sm text-slate-600 dark:text-slate-300 leading-relaxed">
+              An interactive web application designed to help event organizers evaluate venue photography, analyze terrain & weather risks, calculate estimated costs, and generate action plans in minutes.
+            </p>
+
+            <div class="space-y-3">
+              <div class="flex flex-wrap gap-1.5">
+                <span class="px-2 py-0.5 bg-slate-100 text-slate-700 rounded-md text-xs font-mono dark:bg-slate-800 dark:text-slate-300">Next.js</span>
+                <span class="px-2 py-0.5 bg-slate-100 text-slate-700 rounded-md text-xs font-mono dark:bg-slate-800 dark:text-slate-300">React</span>
+                <span class="px-2 py-0.5 bg-slate-100 text-slate-700 rounded-md text-xs font-mono dark:bg-slate-800 dark:text-slate-300">Tailwind CSS</span>
+                <span class="px-2 py-0.5 bg-slate-100 text-slate-700 rounded-md text-xs font-mono dark:bg-slate-800 dark:text-slate-300">Responsive UI</span>
+              </div>
+
+              <div class="pt-2 flex items-center gap-3">
+                <a href="https://yeck-fun.vercel.app/" target="_blank" rel="noopener noreferrer" referrerpolicy="no-referrer" class="flex-1 inline-flex items-center justify-center gap-2 px-4 py-2.5 rounded-xl bg-brand-600 hover:bg-brand-700 text-white text-xs font-semibold shadow-sm transition-colors">
+                  <span>Visit Live Demo</span>
+                  <i data-lucide="external-link" class="w-3.5 h-3.5"></i>
+                </a>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <!-- PROJECT 2: AI ESCALATION & TRIAGE COPILOT -->
+        <div class="bg-white rounded-3xl border border-slate-200/80 overflow-hidden shadow-sm dark:bg-slate-900 dark:border-slate-800 flex flex-col card-hover">
+          <div class="relative bg-gradient-to-br from-teal-500/10 via-slate-100 to-brand-50 p-6 border-b border-slate-200/60 dark:from-teal-950/40 dark:via-slate-800/40 dark:to-slate-900">
+            <div class="flex items-center justify-between mb-4">
+              <span class="inline-flex items-center gap-1.5 px-2.5 py-1 rounded-full bg-teal-100 text-teal-800 text-xs font-bold dark:bg-teal-900/60 dark:text-teal-300">
+                <i data-lucide="bot" class="w-3 h-3"></i> AI & SQL System
+              </span>
+              <span class="text-xs font-mono text-slate-500">AI Logic · Database</span>
+            </div>
+            <h3 class="text-xl font-bold text-slate-900 dark:text-white">AI Escalation Triage Engine</h3>
+            <p class="text-xs text-slate-600 dark:text-slate-300 mt-1">SME Support Assistant & Case Resolver</p>
+          </div>
+
+          <div class="p-6 flex-1 flex flex-col justify-between space-y-4">
+            <p class="text-sm text-slate-600 dark:text-slate-300 leading-relaxed">
+              Inspired by real Subject Matter Expert workflows at American Eagle: parses incoming high-priority customer escalations, queries relational policy databases, detects exceptions, and drafts compliant resolution recommendations.
+            </p>
+
+            <div class="space-y-3">
+              <div class="flex flex-wrap gap-1.5">
+                <span class="px-2 py-0.5 bg-slate-100 text-slate-700 rounded-md text-xs font-mono dark:bg-slate-800 dark:text-slate-300">Python / JS</span>
+                <span class="px-2 py-0.5 bg-slate-100 text-slate-700 rounded-md text-xs font-mono dark:bg-slate-800 dark:text-slate-300">SQL Schema</span>
+                <span class="px-2 py-0.5 bg-slate-100 text-slate-700 rounded-md text-xs font-mono dark:bg-slate-800 dark:text-slate-300">AI Prompting</span>
+                <span class="px-2 py-0.5 bg-slate-100 text-slate-700 rounded-md text-xs font-mono dark:bg-slate-800 dark:text-slate-300">Case Logic</span>
+              </div>
+
+              <div class="pt-2">
+                <a href="./triage-engine/index.html" class="inline-flex items-center justify-center gap-1 text-xs font-semibold text-teal-700 dark:text-teal-400 bg-teal-50 dark:bg-teal-950/60 px-3 py-1.5 rounded-lg w-full hover:bg-teal-100 transition-colors">
+                  <i data-lucide="bot" class="w-3.5 h-3.5"></i>
+                  <span>Open Live App</span>
+                </a>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <!-- PROJECT 3: OOP & IT ASSET MANAGEMENT -->
+        <div class="bg-white rounded-3xl border border-slate-200/80 overflow-hidden shadow-sm dark:bg-slate-900 dark:border-slate-800 flex flex-col card-hover">
+          <div class="relative bg-gradient-to-br from-emerald-500/10 via-slate-100 to-brand-50 p-6 border-b border-slate-200/60 dark:from-emerald-950/40 dark:via-slate-800/40 dark:to-slate-900">
+            <div class="flex items-center justify-between mb-4">
+              <span class="inline-flex items-center gap-1.5 px-2.5 py-1 rounded-full bg-emerald-100 text-emerald-800 text-xs font-bold dark:bg-emerald-900/60 dark:text-emerald-300">
+                <i data-lucide="database" class="w-3 h-3"></i> OOP & Database
+              </span>
+              <span class="text-xs font-mono text-slate-500">Java / C++ · SQL</span>
+            </div>
+            <h3 class="text-xl font-bold text-slate-900 dark:text-white">Enterprise IT Asset Manager</h3>
+            <p class="text-xs text-slate-600 dark:text-slate-300 mt-1">Relational Database & Inventory Architecture</p>
+          </div>
+
+          <div class="p-6 flex-1 flex flex-col justify-between space-y-4">
+            <p class="text-sm text-slate-600 dark:text-slate-300 leading-relaxed">
+              Object-oriented system implementing robust database schemas, transactional integrity, user permissions, and hardware/software asset lifecycle tracking aligned with IT Administration principles.
+            </p>
+
+            <div class="space-y-3">
+              <div class="flex flex-wrap gap-1.5">
+                <span class="px-2 py-0.5 bg-slate-100 text-slate-700 rounded-md text-xs font-mono dark:bg-slate-800 dark:text-slate-300">Java / C++</span>
+                <span class="px-2 py-0.5 bg-slate-100 text-slate-700 rounded-md text-xs font-mono dark:bg-slate-800 dark:text-slate-300">SQL Normalization</span>
+                <span class="px-2 py-0.5 bg-slate-100 text-slate-700 rounded-md text-xs font-mono dark:bg-slate-800 dark:text-slate-300">OOP Design</span>
+                <span class="px-2 py-0.5 bg-slate-100 text-slate-700 rounded-md text-xs font-mono dark:bg-slate-800 dark:text-slate-300">IT Management</span>
+              </div>
+
+              <div class="pt-2">
+                <a href="./asset-manager/index.html" class="inline-flex items-center justify-center gap-1 text-xs font-semibold text-brand-700 dark:text-brand-400 bg-brand-50 dark:bg-brand-950/60 px-3 py-1.5 rounded-lg w-full hover:bg-brand-100 transition-colors">
+                  <i data-lucide="layers" class="w-3.5 h-3.5"></i>
+                  <span>Open Live App</span>
+                </a>
+              </div>
+            </div>
+          </div>
+        </div>
+
+      </div>
+    </section>
+
+    <!-- SECTION: TECHNICAL SKILLS (BENTO GRID) -->
+    <section id="skills" class="space-y-8">
+      <div>
+        <div class="inline-flex items-center gap-1.5 text-xs font-semibold tracking-wider uppercase text-brand-600 font-mono mb-2">
+          <i data-lucide="cpu" class="w-4 h-4"></i>
+          Competencies & Tools
+        </div>
+        <h2 class="text-3xl font-bold text-slate-900 dark:text-white tracking-tight">Technical Stack & Strengths</h2>
+      </div>
+
+      <div class="grid grid-cols-1 md:grid-cols-3 lg:grid-cols-4 gap-4">
+
+        <!-- Card 1: Core Programming -->
+        <div class="md:col-span-2 bg-white rounded-3xl border border-slate-200/80 p-6 dark:bg-slate-900 dark:border-slate-800 space-y-4">
+          <div class="flex items-center gap-3">
+            <div class="w-10 h-10 rounded-2xl bg-brand-50 text-brand-600 dark:bg-brand-950/50 dark:text-brand-400 flex items-center justify-center">
+              <i data-lucide="terminal" class="w-5 h-5"></i>
+            </div>
+            <div>
+              <h3 class="text-base font-bold text-slate-900 dark:text-white">Core Languages & OOP</h3>
+              <p class="text-xs text-slate-500 dark:text-slate-400">Object-Oriented Programming & Logic</p>
+            </div>
+          </div>
+          <div class="grid grid-cols-2 gap-2 pt-2">
+            <div class="p-3 rounded-2xl bg-slate-50 dark:bg-slate-800/60 border border-slate-100 dark:border-slate-800">
+              <div class="font-mono text-xs font-bold text-slate-900 dark:text-white">Java</div>
+              <div class="text-[11px] text-slate-500 mt-0.5">Classes, Inheritance, Polymorphism</div>
+            </div>
+            <div class="p-3 rounded-2xl bg-slate-50 dark:bg-slate-800/60 border border-slate-100 dark:border-slate-800">
+              <div class="font-mono text-xs font-bold text-slate-900 dark:text-white">C++</div>
+              <div class="text-[11px] text-slate-500 mt-0.5">Algorithms, Memory & Logic</div>
+            </div>
+            <div class="p-3 rounded-2xl bg-slate-50 dark:bg-slate-800/60 border border-slate-100 dark:border-slate-800">
+              <div class="font-mono text-xs font-bold text-slate-900 dark:text-white">Programming Logic</div>
+              <div class="text-[11px] text-slate-500 mt-0.5">Debugging & Architecture</div>
+            </div>
+            <div class="p-3 rounded-2xl bg-slate-50 dark:bg-slate-800/60 border border-slate-100 dark:border-slate-800">
+              <div class="font-mono text-xs font-bold text-slate-900 dark:text-white">Web / JS / Next.js</div>
+              <div class="text-[11px] text-slate-500 mt-0.5">Full-stack UI & Frontend</div>
+            </div>
+          </div>
+        </div>
+
+        <!-- Card 2: Databases & Data -->
+        <div class="bg-white rounded-3xl border border-slate-200/80 p-6 dark:bg-slate-900 dark:border-slate-800 space-y-4">
+          <div class="w-10 h-10 rounded-2xl bg-teal-50 text-teal-600 dark:bg-teal-950/50 dark:text-teal-400 flex items-center justify-center">
+            <i data-lucide="database" class="w-5 h-5"></i>
+          </div>
+          <div>
+            <h3 class="text-base font-bold text-slate-900 dark:text-white">Databases</h3>
+            <p class="text-xs text-slate-500 dark:text-slate-400">Data Modeling & SQL</p>
+          </div>
+          <ul class="space-y-2 text-xs text-slate-600 dark:text-slate-300">
+            <li class="flex items-center gap-2"><i data-lucide="check" class="w-3.5 h-3.5 text-brand-600"></i> SQL Queries & Joins</li>
+            <li class="flex items-center gap-2"><i data-lucide="check" class="w-3.5 h-3.5 text-brand-600"></i> Relational Normalization</li>
+            <li class="flex items-center gap-2"><i data-lucide="check" class="w-3.5 h-3.5 text-brand-600"></i> Database Fundamentals</li>
+            <li class="flex items-center gap-2"><i data-lucide="check" class="w-3.5 h-3.5 text-brand-600"></i> Data Analysis</li>
+          </ul>
+        </div>
+
+        <!-- Card 3: AI & Modern Workflow -->
+        <div class="bg-white rounded-3xl border border-slate-200/80 p-6 dark:bg-slate-900 dark:border-slate-800 space-y-4">
+          <div class="w-10 h-10 rounded-2xl bg-amber-50 text-amber-600 dark:bg-amber-950/50 dark:text-amber-400 flex items-center justify-center">
+            <i data-lucide="sparkles" class="w-5 h-5"></i>
+          </div>
+          <div>
+            <h3 class="text-base font-bold text-slate-900 dark:text-white">AI-Assisted Dev</h3>
+            <p class="text-xs text-slate-500 dark:text-slate-400">Accelerated Engineering</p>
+          </div>
+          <ul class="space-y-2 text-xs text-slate-600 dark:text-slate-300">
+            <li class="flex items-center gap-2"><i data-lucide="check" class="w-3.5 h-3.5 text-brand-600"></i> AI Agent Orchestration</li>
+            <li class="flex items-center gap-2"><i data-lucide="check" class="w-3.5 h-3.5 text-brand-600"></i> Prompt Engineering</li>
+            <li class="flex items-center gap-2"><i data-lucide="check" class="w-3.5 h-3.5 text-brand-600"></i> Rapid Prototyping</li>
+            <li class="flex items-center gap-2"><i data-lucide="check" class="w-3.5 h-3.5 text-brand-600"></i> Antigravity / IDE Tools</li>
+          </ul>
+        </div>
+
+        <!-- Card 4: IT Administration & Management (Full width bottom row) -->
+        <div class="md:col-span-3 lg:col-span-4 bg-gradient-to-r from-brand-900 to-slate-900 text-white rounded-3xl p-6 sm:p-8 space-y-4">
+          <div class="flex flex-col sm:flex-row sm:items-center justify-between gap-4">
+            <div>
+              <span class="text-xs font-mono uppercase tracking-wider text-brand-300">Operations & Strategic Leadership</span>
+              <h3 class="text-xl font-bold text-white mt-1">High-Stakes Problem Solving & Process Improvement</h3>
+            </div>
+            <span class="px-3 py-1 rounded-full bg-brand-500/20 border border-brand-400/30 text-brand-300 text-xs font-semibold">
+              American Eagle Outfitters Experience
+            </span>
+          </div>
+          <div class="grid grid-cols-2 sm:grid-cols-4 gap-4 pt-2 text-xs">
+            <div class="p-3 bg-white/5 rounded-2xl border border-white/10">
+              <div class="font-bold text-brand-300">Escalation Management</div>
+              <div class="text-slate-300 text-[11px] mt-0.5">SME authority & high-priority dispute resolution</div>
+            </div>
+            <div class="p-3 bg-white/5 rounded-2xl border border-white/10">
+              <div class="font-bold text-brand-300">Team Supervision</div>
+              <div class="text-slate-300 text-[11px] mt-0.5">Agent coaching, KPI tracking & QA audits</div>
+            </div>
+            <div class="p-3 bg-white/5 rounded-2xl border border-white/10">
+              <div class="font-bold text-brand-300">Process Documentation</div>
+              <div class="text-slate-300 text-[11px] mt-0.5">Standard Operating Procedures & training guides</div>
+            </div>
+            <div class="p-3 bg-white/5 rounded-2xl border border-white/10">
+              <div class="font-bold text-brand-300">Bilingual Fluency</div>
+              <div class="text-slate-300 text-[11px] mt-0.5">100% English professional operations & support</div>
+            </div>
+          </div>
+        </div>
+
+      </div>
+    </section>
+
+    <!-- SECTION: PROFESSIONAL EXPERIENCE (AMERICAN EAGLE OUTFITTERS) -->
+    <section id="experience" class="space-y-8">
+      <div>
+        <div class="inline-flex items-center gap-1.5 text-xs font-semibold tracking-wider uppercase text-brand-600 font-mono mb-2">
+          <i data-lucide="briefcase" class="w-4 h-4"></i>
+          Career Trajectory
+        </div>
+        <h2 class="text-3xl font-bold text-slate-900 dark:text-white tracking-tight">Professional Experience</h2>
+        <p class="text-sm text-slate-500 dark:text-slate-400 mt-1">
+          4+ Years of continuous progression in customer operations for American Eagle Outfitters.
+        </p>
+      </div>
+
+      <!-- EXPERIENCE CARD -->
+      <div class="bg-white rounded-3xl border border-slate-200/80 p-6 sm:p-8 dark:bg-slate-900 dark:border-slate-800 space-y-8">
+        
+        <!-- Company Header -->
+        <div class="flex flex-col sm:flex-row sm:items-center justify-between pb-6 border-b border-slate-100 dark:border-slate-800 gap-4">
+          <div class="flex items-center gap-4">
+            <div class="w-12 h-12 rounded-2xl bg-slate-900 text-white flex items-center justify-center font-bold text-lg">
+              AEO
+            </div>
+            <div>
+              <h3 class="text-lg font-bold text-slate-900 dark:text-white">American Eagle Outfitters (AEO) Campaign</h3>
+              <p class="text-xs text-slate-500">Teleperformance Partner · Mexico (English Operations)</p>
+            </div>
+          </div>
+          <span class="inline-flex items-center gap-1.5 px-3 py-1.5 rounded-full bg-brand-50 text-brand-700 text-xs font-semibold dark:bg-brand-950 dark:text-brand-300">
+            <i data-lucide="calendar" class="w-3.5 h-3.5"></i> Over 4 Years of Experience
+          </span>
+        </div>
+
+        <!-- 3 Roles Progressive Timeline -->
+        <div class="space-y-8 relative before:absolute before:inset-0 before:left-3.5 before:w-0.5 before:bg-slate-200 dark:before:bg-slate-800">
+
+          <!-- Role 1: Customer Service Supervisor -->
+          <div class="relative pl-10 space-y-2">
+            <div class="absolute left-1.5 top-1.5 w-4 h-4 rounded-full border-4 border-white bg-brand-600 dark:border-slate-900"></div>
+            <div class="flex flex-col sm:flex-row sm:items-center justify-between">
+              <h4 class="text-base font-bold text-slate-900 dark:text-white">Customer Service Supervisor</h4>
+              <span class="text-xs font-mono text-brand-700 dark:text-brand-400 font-medium">Leadership & Operational Execution</span>
+            </div>
+            <ul class="text-xs sm:text-sm text-slate-600 dark:text-slate-300 space-y-1.5 list-disc list-inside">
+              <li>Supervised and supported customer service agents to ensure performance and quality objectives were achieved.</li>
+              <li>Monitored Key Performance Indicators (KPIs) and identified actionable opportunities for operational workflow improvement.</li>
+              <li>Delivered continuous coaching, feedback, and skill development support to team members.</li>
+              <li>Assisted in high-priority operational resolutions and coordinated escalations with senior campaign stakeholders.</li>
+            </ul>
+          </div>
+
+          <!-- Role 2: Subject Matter Expert (SME) -->
+          <div class="relative pl-10 space-y-2">
+            <div class="absolute left-1.5 top-1.5 w-4 h-4 rounded-full border-4 border-white bg-teal-500 dark:border-slate-900"></div>
+            <div class="flex flex-col sm:flex-row sm:items-center justify-between">
+              <h4 class="text-base font-bold text-slate-900 dark:text-white">Subject Matter Expert (SME)</h4>
+              <span class="text-xs font-mono text-teal-700 dark:text-teal-400 font-medium">High-Level Escalations & Governance</span>
+            </div>
+            <ul class="text-xs sm:text-sm text-slate-600 dark:text-slate-300 space-y-1.5 list-disc list-inside">
+              <li>Managed and resolved complex customer service escalations requiring specialized review, critical analysis, and authorized decision-making.</li>
+              <li>Provided operational guidance and technical/policy support to agents regarding American Eagle operating procedures and case resolutions.</li>
+              <li>Reviewed exceptional customer cases and granted official SME approvals on sensitive account actions.</li>
+              <li>Maintained strict compliance with American Eagle policies, enterprise procedures, and quality standards.</li>
+            </ul>
+          </div>
+
+          <!-- Role 3: Customer Service Specialist -->
+          <div class="relative pl-10 space-y-2">
+            <div class="absolute left-1.5 top-1.5 w-4 h-4 rounded-full border-4 border-white bg-slate-400 dark:border-slate-900"></div>
+            <div class="flex flex-col sm:flex-row sm:items-center justify-between">
+              <h4 class="text-base font-bold text-slate-900 dark:text-white">Customer Service Specialist</h4>
+              <span class="text-xs font-mono text-slate-500 dark:text-slate-400 font-medium">Core Customer Operations</span>
+            </div>
+            <ul class="text-xs sm:text-sm text-slate-600 dark:text-slate-300 space-y-1.5 list-disc list-inside">
+              <li>Resolved customer inquiries with high satisfaction ratings across multi-channel international English communications.</li>
+              <li>Consistently exceeded productivity, quality, and performance targets in a fast-paced environment.</li>
+            </ul>
+          </div>
+
+        </div>
+
+      </div>
+    </section>
+
+    <!-- SECTION: EDUCATION & CREDENTIALS -->
+    <section id="education" class="space-y-8">
+      <div>
+        <div class="inline-flex items-center gap-1.5 text-xs font-semibold tracking-wider uppercase text-brand-600 font-mono mb-2">
+          <i data-lucide="graduation-cap" class="w-4 h-4"></i>
+          Academic Foundation
+        </div>
+        <h2 class="text-3xl font-bold text-slate-900 dark:text-white tracking-tight">Education</h2>
+      </div>
+
+      <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+
+        <!-- Degree Card -->
+        <div class="bg-white rounded-3xl border border-slate-200/80 p-6 sm:p-8 dark:bg-slate-900 dark:border-slate-800 space-y-4 card-hover">
+          <div class="flex items-center justify-between">
+            <span class="px-3 py-1 rounded-full bg-brand-50 text-brand-700 text-xs font-bold dark:bg-brand-950 dark:text-brand-300">
+              In Progress · 70%+ Completed
+            </span>
+            <span class="text-xs font-mono text-slate-400">UNITEC</span>
+          </div>
+
+          <h3 class="text-xl font-bold text-slate-900 dark:text-white">
+            Bachelor's Degree in Information Technology Administration
+          </h3>
+          <p class="text-sm font-medium text-brand-700 dark:text-brand-400">
+            Universidad Tecnológica de México (UNITEC)
+          </p>
+
+          <p class="text-xs sm:text-sm text-slate-600 dark:text-slate-300 leading-relaxed">
+            Rigorous curriculum covering database administration, object-oriented programming (Java & C++), computer network infrastructure, software engineering logic, and enterprise IT management.
+          </p>
+
+          <div class="pt-2 flex flex-wrap gap-2">
+            <span class="px-2.5 py-1 bg-slate-100 dark:bg-slate-800 text-slate-700 dark:text-slate-300 rounded-lg text-xs font-mono">IT Systems Administration</span>
+            <span class="px-2.5 py-1 bg-slate-100 dark:bg-slate-800 text-slate-700 dark:text-slate-300 rounded-lg text-xs font-mono">Database Design</span>
+            <span class="px-2.5 py-1 bg-slate-100 dark:bg-slate-800 text-slate-700 dark:text-slate-300 rounded-lg text-xs font-mono">OOP & Algorithms</span>
+          </div>
+        </div>
+
+        <!-- Languages & Professional Strengths -->
+        <div class="bg-white rounded-3xl border border-slate-200/80 p-6 sm:p-8 dark:bg-slate-900 dark:border-slate-800 space-y-6 card-hover">
+          <div>
+            <h3 class="text-lg font-bold text-slate-900 dark:text-white">Languages & Communication</h3>
+            <div class="grid grid-cols-2 gap-3 mt-3">
+              <div class="p-3 rounded-2xl bg-slate-50 dark:bg-slate-800/60 border border-slate-100 dark:border-slate-800">
+                <div class="text-xs font-bold text-slate-900 dark:text-white">English</div>
+                <div class="text-[11px] text-brand-600 font-semibold mt-0.5">Advanced Professional (C1/C2)</div>
+                <div class="text-[10px] text-slate-500">4+ yrs in native English operations</div>
+              </div>
+              <div class="p-3 rounded-2xl bg-slate-50 dark:bg-slate-800/60 border border-slate-100 dark:border-slate-800">
+                <div class="text-xs font-bold text-slate-900 dark:text-white">Spanish</div>
+                <div class="text-[11px] text-brand-600 font-semibold mt-0.5">Native Proficiency</div>
+                <div class="text-[10px] text-slate-500">Primary language</div>
+              </div>
+            </div>
+          </div>
+
+          <div>
+            <h4 class="text-xs font-bold uppercase tracking-wider text-slate-400 font-mono">Core Strengths</h4>
+            <div class="flex flex-wrap gap-2 mt-2">
+              <span class="px-2.5 py-1 rounded-full bg-emerald-50 text-emerald-800 dark:bg-emerald-950/60 dark:text-emerald-300 text-xs">Critical Thinking</span>
+              <span class="px-2.5 py-1 rounded-full bg-emerald-50 text-emerald-800 dark:bg-emerald-950/60 dark:text-emerald-300 text-xs">Complex Case Resolution</span>
+              <span class="px-2.5 py-1 rounded-full bg-emerald-50 text-emerald-800 dark:bg-emerald-950/60 dark:text-emerald-300 text-xs">Rapid Tech Adoption</span>
+              <span class="px-2.5 py-1 rounded-full bg-emerald-50 text-emerald-800 dark:bg-emerald-950/60 dark:text-emerald-300 text-xs">Attention to Detail</span>
+            </div>
+          </div>
+        </div>
+
+      </div>
+    </section>
+
+    <!-- SECTION: CONTACT & CONNECT -->
+    <section id="contact" class="bg-gradient-to-b from-brand-50 to-white dark:from-slate-900 dark:to-slate-950 rounded-3xl border border-brand-200/80 dark:border-slate-800 p-8 sm:p-12 text-center space-y-6">
+      <div class="max-w-2xl mx-auto space-y-3">
+        <div class="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-brand-100 text-brand-800 text-xs font-bold dark:bg-brand-900/60 dark:text-brand-300">
+          <i data-lucide="mail" class="w-3.5 h-3.5"></i> Let’s Connect
+        </div>
+        <h2 class="text-3xl sm:text-4xl font-extrabold text-slate-900 dark:text-white tracking-tight">
+          Ready to contribute to your team.
+        </h2>
+        <p class="text-sm sm:text-base text-slate-600 dark:text-slate-300">
+          Whether you're looking for a software developer, an AI solutions engineer, or an IT administrator with real leadership experience, let's talk.
+        </p>
+      </div>
+
+      <!-- Contact Action Grid -->
+      <div class="max-w-xl mx-auto grid grid-cols-1 sm:grid-cols-2 gap-4 pt-4">
+        <a href="mailto:coloradolevi10@gmail.com" class="flex items-center justify-center gap-2.5 p-4 rounded-2xl bg-brand-600 hover:bg-brand-700 text-white font-semibold text-sm shadow-sm transition-all hover:scale-[1.02]">
+          <i data-lucide="send" class="w-4 h-4"></i>
+          <span>Send Direct Email</span>
+        </a>
+
+        <a href="https://www.linkedin.com/in/leonardo-levi-joaquin-colorado-946128219/" target="_blank" rel="noopener noreferrer" referrerpolicy="no-referrer" class="flex items-center justify-center gap-2.5 p-4 rounded-2xl bg-white hover:bg-slate-50 text-slate-800 border border-slate-200 font-semibold text-sm shadow-sm transition-all hover:scale-[1.02] dark:bg-slate-800 dark:border-slate-700 dark:text-white dark:hover:bg-slate-700">
+          <i data-lucide="linkedin" class="w-4 h-4 text-[#0077B5]"></i>
+          <span>Connect on LinkedIn</span>
+        </a>
+      </div>
+
+      <div class="pt-4 text-xs text-slate-500 dark:text-slate-400">
+        Direct contacts: <span class="font-mono text-slate-700 dark:text-slate-300">coloradolevi10@gmail.com</span> · <span class="font-mono text-slate-700 dark:text-slate-300">snmn20mgf@gmail.com</span> · <span class="font-mono text-slate-700 dark:text-slate-300">+52 55 1489 1005</span>
+      </div>
+    </section>
+
+  </main>
+
+  <!-- FOOTER -->
+  <footer class="border-t border-slate-200/80 bg-white dark:bg-slate-900 dark:border-slate-800 py-8 text-center text-xs text-slate-500 dark:text-slate-400">
+    <div class="max-w-6xl mx-auto px-4 flex flex-col sm:flex-row items-center justify-between gap-4">
+      <p>© 2026 Leonardo Levi Joaquin Colorado · Designed with Antigravity</p>
+      <div class="flex items-center gap-6">
+        <a href="#hero" class="hover:text-brand-600 transition-colors">Back to Top ↑</a>
+        <a href="https://www.linkedin.com/in/leonardo-levi-joaquin-colorado-946128219/" target="_blank" rel="noopener noreferrer" referrerpolicy="no-referrer" class="hover:text-brand-600 transition-colors">LinkedIn</a>
+        <a href="https://yeck-fun.vercel.app/" target="_blank" rel="noopener noreferrer" referrerpolicy="no-referrer" class="hover:text-brand-600 transition-colors">YeckFun Project</a>
+      </div>
+    </div>
+  </footer>
+
+  <!-- SCRIPT FOR THEME TOGGLE, LUCIDE ICONS, AND UTILITIES -->
+  <script>
+    // Initialize Lucide Icons
+    lucide.createIcons();
+
+    // Dark/Light Mode toggle logic
+    const themeToggleBtn = document.getElementById('theme-toggle');
+    const htmlEl = document.documentElement;
+
+    // Check system preference or saved preference
+    if (localStorage.getItem('color-theme') === 'dark' || (!('color-theme' in localStorage) && window.matchMedia('(prefers-color-scheme: dark)').matches)) {
+      htmlEl.classList.add('dark');
+    } else {
+      htmlEl.classList.remove('dark');
+    }
+
+    themeToggleBtn.addEventListener('click', () => {
+      if (htmlEl.classList.contains('dark')) {
+        htmlEl.classList.remove('dark');
+        localStorage.setItem('color-theme', 'light');
+      } else {
+        htmlEl.classList.add('dark');
+        localStorage.setItem('color-theme', 'dark');
+      }
+      lucide.createIcons();
+    });
+
+    // Copy to clipboard helper
+    function copyContact(text, btnElement) {
+      navigator.clipboard.writeText(text).then(() => {
+        const textSpan = document.getElementById('copy-email-text');
+        const originalText = textSpan.innerText;
+        textSpan.innerText = 'Copied!';
+        setTimeout(() => {
+          textSpan.innerText = originalText;
+        }, 2000);
+      });
+    }
+  </script>
+</body>
+</html>

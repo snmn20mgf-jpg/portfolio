@@ -1,0 +1,844 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>AI Escalation Triage Engine | Leonardo Levi</title>
+  <meta name="description" content="SME-inspired escalation triage system for customer case resolution — built by Leonardo Levi Joaquin Colorado." />
+
+  <!-- Security Headers -->
+  <meta http-equiv="X-Frame-Options" content="DENY" />
+  <meta http-equiv="X-Content-Type-Options" content="nosniff" />
+  <meta name="referrer" content="strict-origin-when-cross-origin" />
+
+  <!-- Google Fonts -->
+  <link rel="preconnect" href="https://fonts.googleapis.com" crossorigin>
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet" crossorigin="anonymous">
+
+  <style>
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+    :root {
+      --bg: #f0f4f8;
+      --surface: #ffffff;
+      --surface-2: #f8fafc;
+      --border: #e2e8f0;
+      --border-2: #cbd5e1;
+      --text-primary: #0f172a;
+      --text-secondary: #475569;
+      --text-muted: #94a3b8;
+      --accent: #6366f1;
+      --accent-light: #eef2ff;
+      --accent-dark: #4f46e5;
+      --critical: #ef4444;
+      --critical-bg: #fef2f2;
+      --critical-border: #fecaca;
+      --high: #f59e0b;
+      --high-bg: #fffbeb;
+      --high-border: #fde68a;
+      --normal: #10b981;
+      --normal-bg: #ecfdf5;
+      --normal-border: #a7f3d0;
+      --vip: #8b5cf6;
+      --vip-bg: #f5f3ff;
+      --vip-border: #ddd6fe;
+      --shadow-sm: 0 1px 3px rgba(0,0,0,0.06), 0 1px 2px rgba(0,0,0,0.04);
+      --shadow: 0 4px 6px -1px rgba(0,0,0,0.07), 0 2px 4px -1px rgba(0,0,0,0.04);
+      --shadow-lg: 0 10px 25px -5px rgba(0,0,0,0.08), 0 4px 10px -3px rgba(0,0,0,0.05);
+      --radius: 16px;
+      --radius-sm: 10px;
+    }
+
+    body {
+      font-family: 'Inter', system-ui, sans-serif;
+      background: var(--bg);
+      color: var(--text-primary);
+      min-height: 100vh;
+      line-height: 1.6;
+    }
+
+    /* ── TOP BAR ── */
+    .topbar {
+      background: var(--surface);
+      border-bottom: 1px solid var(--border);
+      padding: 0 24px;
+      height: 60px;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      position: sticky;
+      top: 0;
+      z-index: 100;
+      box-shadow: var(--shadow-sm);
+    }
+    .topbar-brand {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      font-weight: 700;
+      font-size: 15px;
+      color: var(--text-primary);
+      text-decoration: none;
+    }
+    .topbar-logo {
+      width: 32px; height: 32px;
+      background: linear-gradient(135deg, var(--accent), #818cf8);
+      border-radius: 8px;
+      display: flex; align-items: center; justify-content: center;
+      color: white;
+      font-size: 14px;
+      font-weight: 800;
+      letter-spacing: -0.5px;
+    }
+    .topbar-badge {
+      font-size: 11px;
+      font-weight: 600;
+      padding: 3px 10px;
+      border-radius: 100px;
+      background: var(--accent-light);
+      color: var(--accent);
+      border: 1px solid #c7d2fe;
+    }
+    .topbar-back {
+      font-size: 13px;
+      color: var(--text-secondary);
+      text-decoration: none;
+      display: flex;
+      align-items: center;
+      gap: 5px;
+      transition: color 0.2s;
+    }
+    .topbar-back:hover { color: var(--accent); }
+
+    /* ── LAYOUT ── */
+    .app-container {
+      max-width: 1200px;
+      margin: 0 auto;
+      padding: 28px 20px 48px;
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 20px;
+      align-items: start;
+    }
+
+    .page-header {
+      grid-column: 1 / -1;
+      margin-bottom: 4px;
+    }
+    .page-header h1 {
+      font-size: 26px;
+      font-weight: 700;
+      color: var(--text-primary);
+      letter-spacing: -0.5px;
+    }
+    .page-header p {
+      font-size: 14px;
+      color: var(--text-secondary);
+      margin-top: 4px;
+    }
+
+    /* ── CARDS ── */
+    .card {
+      background: var(--surface);
+      border: 1px solid var(--border);
+      border-radius: var(--radius);
+      box-shadow: var(--shadow-sm);
+      overflow: hidden;
+    }
+    .card-header {
+      padding: 18px 20px 14px;
+      border-bottom: 1px solid var(--border);
+      display: flex;
+      align-items: center;
+      gap: 10px;
+    }
+    .card-header-icon {
+      width: 34px; height: 34px;
+      border-radius: 8px;
+      display: flex; align-items: center; justify-content: center;
+      font-size: 16px;
+      flex-shrink: 0;
+    }
+    .card-header-title { font-size: 14px; font-weight: 600; color: var(--text-primary); }
+    .card-header-sub { font-size: 12px; color: var(--text-muted); margin-top: 1px; }
+    .card-body { padding: 20px; }
+
+    /* ── FORM ── */
+    label {
+      display: block;
+      font-size: 13px;
+      font-weight: 500;
+      color: var(--text-secondary);
+      margin-bottom: 6px;
+    }
+    textarea, input, select {
+      width: 100%;
+      font-family: inherit;
+      font-size: 14px;
+      color: var(--text-primary);
+      background: var(--surface-2);
+      border: 1px solid var(--border-2);
+      border-radius: var(--radius-sm);
+      padding: 10px 14px;
+      transition: border-color 0.2s, box-shadow 0.2s;
+      outline: none;
+      resize: vertical;
+    }
+    textarea:focus, input:focus, select:focus {
+      border-color: var(--accent);
+      box-shadow: 0 0 0 3px rgba(99,102,241,0.12);
+    }
+    textarea { min-height: 160px; }
+    .form-group { margin-bottom: 16px; }
+    .form-row { display: grid; grid-template-columns: 1fr 1fr; gap: 12px; }
+
+    /* ── BUTTON ── */
+    .btn {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      gap: 7px;
+      font-family: inherit;
+      font-size: 14px;
+      font-weight: 600;
+      padding: 10px 20px;
+      border-radius: var(--radius-sm);
+      border: none;
+      cursor: pointer;
+      transition: all 0.2s;
+    }
+    .btn-primary {
+      background: var(--accent);
+      color: white;
+      width: 100%;
+      padding: 12px;
+    }
+    .btn-primary:hover { background: var(--accent-dark); transform: translateY(-1px); box-shadow: 0 4px 12px rgba(99,102,241,0.3); }
+    .btn-primary:active { transform: translateY(0); }
+    .btn-ghost {
+      background: transparent;
+      color: var(--text-secondary);
+      border: 1px solid var(--border-2);
+      font-size: 12px;
+      padding: 6px 12px;
+    }
+    .btn-ghost:hover { background: var(--surface-2); color: var(--text-primary); }
+
+    /* ── RESULT PANEL ── */
+    #result-panel { display: none; }
+    #result-panel.visible { display: block; }
+
+    .priority-badge {
+      display: inline-flex;
+      align-items: center;
+      gap: 6px;
+      font-size: 12px;
+      font-weight: 700;
+      padding: 5px 12px;
+      border-radius: 100px;
+      letter-spacing: 0.3px;
+    }
+    .priority-badge.critical { background: var(--critical-bg); color: var(--critical); border: 1px solid var(--critical-border); }
+    .priority-badge.high     { background: var(--high-bg);     color: #92400e;          border: 1px solid var(--high-border); }
+    .priority-badge.normal   { background: var(--normal-bg);   color: #065f46;          border: 1px solid var(--normal-border); }
+    .priority-badge.vip      { background: var(--vip-bg);      color: var(--vip);       border: 1px solid var(--vip-border); }
+
+    .result-section { margin-bottom: 16px; }
+    .result-label {
+      font-size: 11px;
+      font-weight: 600;
+      text-transform: uppercase;
+      letter-spacing: 0.8px;
+      color: var(--text-muted);
+      margin-bottom: 6px;
+    }
+    .result-value {
+      font-size: 14px;
+      color: var(--text-primary);
+    }
+    .resolution-box {
+      background: var(--surface-2);
+      border: 1px solid var(--border);
+      border-radius: var(--radius-sm);
+      padding: 14px;
+      font-size: 13.5px;
+      line-height: 1.7;
+      color: var(--text-primary);
+      font-style: italic;
+    }
+    .policy-tags {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 6px;
+      margin-top: 6px;
+    }
+    .policy-tag {
+      font-size: 11px;
+      font-weight: 500;
+      padding: 3px 10px;
+      border-radius: 6px;
+      background: var(--accent-light);
+      color: var(--accent-dark);
+      border: 1px solid #c7d2fe;
+    }
+    .divider { height: 1px; background: var(--border); margin: 16px 0; }
+
+    .result-header {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      flex-wrap: wrap;
+      gap: 8px;
+      margin-bottom: 20px;
+    }
+    .case-id-badge {
+      font-size: 11px;
+      font-family: 'JetBrains Mono', monospace;
+      color: var(--text-muted);
+      background: var(--surface-2);
+      border: 1px solid var(--border);
+      padding: 4px 10px;
+      border-radius: 6px;
+    }
+
+    /* ── CASE LOG ── */
+    .log-full { grid-column: 1 / -1; }
+    .log-table-wrap { overflow-x: auto; }
+    table { width: 100%; border-collapse: collapse; font-size: 13px; }
+    th {
+      text-align: left;
+      padding: 10px 14px;
+      font-size: 11px;
+      font-weight: 600;
+      color: var(--text-muted);
+      text-transform: uppercase;
+      letter-spacing: 0.6px;
+      border-bottom: 1px solid var(--border);
+      white-space: nowrap;
+    }
+    td {
+      padding: 12px 14px;
+      border-bottom: 1px solid var(--border);
+      color: var(--text-secondary);
+      vertical-align: middle;
+    }
+    tr:last-child td { border-bottom: none; }
+    tr:hover td { background: var(--surface-2); }
+    .empty-state {
+      text-align: center;
+      padding: 40px 20px;
+      color: var(--text-muted);
+      font-size: 14px;
+    }
+    .empty-state-icon { font-size: 36px; margin-bottom: 8px; }
+    .log-count {
+      font-size: 12px;
+      font-weight: 600;
+      padding: 2px 8px;
+      border-radius: 100px;
+      background: var(--accent-light);
+      color: var(--accent);
+      margin-left: auto;
+    }
+
+    /* ── LOADING ANIMATION ── */
+    .thinking-dots span {
+      display: inline-block;
+      animation: blink 1.2s infinite;
+      font-size: 20px;
+      line-height: 1;
+    }
+    .thinking-dots span:nth-child(2) { animation-delay: 0.2s; }
+    .thinking-dots span:nth-child(3) { animation-delay: 0.4s; }
+    @keyframes blink { 0%,80%,100% { opacity:0.2; } 40% { opacity:1; } }
+
+    /* ── RESPONSIVE ── */
+    @media (max-width: 768px) {
+      .app-container { grid-template-columns: 1fr; }
+      .form-row { grid-template-columns: 1fr; }
+      .log-full { grid-column: 1; }
+    }
+  </style>
+</head>
+<body>
+
+  <!-- TOP BAR -->
+  <nav class="topbar">
+    <a href="#" class="topbar-brand">
+      <div class="topbar-logo" style="background: linear-gradient(135deg, #0d9488, #14b8a6);">
+        <svg width="17" height="17" viewBox="0 0 24 24" fill="none">
+          <path d="M12 2L4 6v6c0 5.25 3.5 10.15 8 11.5 4.5-1.35 8-6.25 8-11.5V6L12 2Z" fill="white" fill-opacity="0.25" stroke="white" stroke-width="1.5" stroke-linejoin="round"/>
+          <path d="M9 12l2 2 4-4" stroke="white" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+        </svg>
+      </div>
+      <span>Escalation Triage Engine</span>
+    </a>
+    <div style="display:flex;align-items:center;gap:12px;">
+      <span class="topbar-badge">⚡ SME System v1.0</span>
+      <a href="../index.html" class="topbar-back">← Portfolio</a>
+    </div>
+  </nav>
+
+  <div class="app-container">
+
+    <!-- PAGE HEADER -->
+    <div class="page-header">
+      <h1>Customer Escalation Triage</h1>
+      <p>Paste the customer case below. The engine will analyze priority, category, applicable policies, and draft a compliant SME resolution.</p>
+    </div>
+
+    <!-- INPUT PANEL -->
+    <div class="card">
+      <div class="card-header">
+        <div class="card-header-icon" style="background:#eef2ff;">📥</div>
+        <div>
+          <div class="card-header-title">New Case Submission</div>
+          <div class="card-header-sub">Enter the customer escalation details</div>
+        </div>
+      </div>
+      <div class="card-body">
+
+        <!-- Step 1: Channel selector (drives which contact fields appear) -->
+        <div class="form-group">
+          <label for="channel">📡 Contact Channel</label>
+          <select id="channel" onchange="updateChannelFields(this.value)" style="font-weight:600;">
+            <option value="Chat">💬 Chat</option>
+            <option value="Email">📧 Email</option>
+            <option value="Phone">📞 Phone</option>
+            <option value="Social">📲 Social Media</option>
+          </select>
+        </div>
+
+        <!-- Step 2: Dynamic customer contact section -->
+        <div style="background:var(--surface-2);border:1px solid var(--border);border-radius:var(--radius-sm);padding:14px 16px;margin-bottom:16px;">
+          <div style="font-size:11px;font-weight:600;text-transform:uppercase;letter-spacing:0.7px;color:var(--text-muted);margin-bottom:12px;">Customer Contact Info</div>
+
+          <!-- Always shown: Customer Name -->
+          <div class="form-group">
+            <label for="customer-name">Customer Name</label>
+            <input type="text" id="customer-name" placeholder="e.g. John Smith" />
+          </div>
+
+          <!-- Chat fields -->
+          <div id="fields-chat" class="channel-fields">
+            <div class="form-group" style="margin-bottom:0;">
+              <label for="chat-session-id">Chat Session ID</label>
+              <input type="text" id="chat-session-id" placeholder="e.g. CHT-29384756" />
+            </div>
+          </div>
+
+          <!-- Email fields -->
+          <div id="fields-email" class="channel-fields" style="display:none;">
+            <div class="form-group" style="margin-bottom:0;">
+              <label for="customer-email">Customer Email Address</label>
+              <input type="email" id="customer-email" placeholder="e.g. customer@email.com" />
+            </div>
+          </div>
+
+          <!-- Phone fields -->
+          <div id="fields-phone" class="channel-fields" style="display:none;">
+            <div class="form-group" style="margin-bottom:0;">
+              <label for="customer-phone">Customer Phone Number</label>
+              <input type="tel" id="customer-phone" placeholder="e.g. +1 (555) 000-0000" />
+            </div>
+          </div>
+
+          <!-- Social Media fields -->
+          <div id="fields-social" class="channel-fields" style="display:none;">
+            <div class="form-row">
+              <div class="form-group" style="margin-bottom:0;">
+                <label for="social-platform">Platform</label>
+                <select id="social-platform">
+                  <option value="Twitter / X">Twitter / X</option>
+                  <option value="Instagram">Instagram</option>
+                  <option value="Facebook">Facebook</option>
+                  <option value="TikTok">TikTok</option>
+                </select>
+              </div>
+              <div class="form-group" style="margin-bottom:0;">
+                <label for="social-handle">Username / Handle</label>
+                <input type="text" id="social-handle" placeholder="e.g. @username" />
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <!-- Step 3: Case details -->
+        <div class="form-row">
+          <div class="form-group">
+            <label for="agent-name">Submitting Agent Name</label>
+            <input type="text" id="agent-name" placeholder="e.g. Maria Gonzalez" />
+          </div>
+          <div class="form-group">
+            <label for="order-id">Order / Case ID</label>
+            <input type="text" id="order-id" placeholder="e.g. ORD-102938" />
+          </div>
+        </div>
+
+        <div class="form-group">
+          <label for="case-text">Customer Escalation Message</label>
+          <textarea id="case-text" placeholder="Paste the full customer message or describe the issue here...
+
+Example: 'I ordered 3 items on Nov 15th. The package was marked delivered but I never received it. I've been waiting 2 weeks and customer service hasn't helped. I want a full refund or I'll dispute with my bank.'"></textarea>
+        </div>
+
+        <button class="btn btn-primary" id="triage-btn" onclick="runTriage()">
+          🔍 Analyze & Triage Case
+        </button>
+      </div>
+    </div>
+
+    <!-- RESULT PANEL -->
+    <div id="result-panel" class="card">
+      <div class="card-header">
+        <div class="card-header-icon" style="background:#ecfdf5;">📋</div>
+        <div>
+          <div class="card-header-title">SME Triage Report</div>
+          <div class="card-header-sub" id="result-timestamp">—</div>
+        </div>
+        <button class="btn btn-ghost" style="margin-left:auto;" onclick="clearResult()">Clear</button>
+      </div>
+      <div class="card-body">
+        <div id="thinking-state" style="text-align:center;padding:30px 0;display:none;">
+          <div style="font-size:14px;color:var(--text-muted);margin-bottom:8px;">Analyzing case</div>
+          <div class="thinking-dots"><span>●</span><span>●</span><span>●</span></div>
+        </div>
+        <div id="result-content">
+          <div class="result-header">
+            <div>
+              <div class="result-label">Priority Level</div>
+              <span id="priority-badge" class="priority-badge">—</span>
+            </div>
+            <span id="case-id" class="case-id-badge">CASE-000000</span>
+          </div>
+
+          <div class="result-section">
+            <div class="result-label">Case Category</div>
+            <div class="result-value" id="category-text" style="font-weight:600;">—</div>
+          </div>
+
+          <div class="divider"></div>
+
+          <div class="result-section">
+            <div class="result-label">SME Recommended Resolution</div>
+            <div class="resolution-box" id="resolution-text">—</div>
+          </div>
+
+          <div class="result-section">
+            <div class="result-label">Policy Tags Applied</div>
+            <div class="policy-tags" id="policy-tags"></div>
+          </div>
+
+          <div class="divider"></div>
+
+          <div class="result-section">
+            <div class="result-label">Risk Notes</div>
+            <div class="result-value" id="risk-notes" style="color:var(--text-secondary);font-size:13px;">—</div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- CASE LOG -->
+    <div class="card log-full">
+      <div class="card-header">
+        <div class="card-header-icon" style="background:#f5f3ff;">🗂️</div>
+        <div>
+          <div class="card-header-title">Case Log</div>
+          <div class="card-header-sub">Session history of triaged cases</div>
+        </div>
+        <span class="log-count" id="log-count">0</span>
+        <button class="btn btn-ghost" onclick="clearLog()" style="margin-left:8px;">Clear Log</button>
+      </div>
+      <div class="card-body" style="padding:0;">
+        <div class="log-table-wrap">
+          <table id="log-table">
+            <thead>
+              <tr>
+                <th>Case ID</th>
+                <th>Time</th>
+                <th>Agent</th>
+                <th>Channel</th>
+                <th>Customer</th>
+                <th>Category</th>
+                <th>Priority</th>
+                <th>Resolution Action</th>
+              </tr>
+            </thead>
+            <tbody id="log-body">
+              <tr>
+                <td colspan="8">
+                  <div class="empty-state">
+                    <div class="empty-state-icon">📭</div>
+                    No cases triaged yet. Submit a case above to get started.
+                  </div>
+                </td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+      </div>
+    </div>
+
+  </div>
+
+  <script>
+    // ── TRIAGE KNOWLEDGE BASE ──────────────────────────────────────────────────
+
+    const rules = [
+      {
+        id: 'REFUND_FULL',
+        category: 'Refund & Order Issue',
+        priority: 'critical',
+        keywords: ['refund', 'money back', 'charge back', 'dispute my bank', 'dispute with bank', 'chargeback', 'not received', 'never received', 'never arrived', 'never got', 'still waiting', 'where is my order', 'where is my package'],
+        policies: ['Refund Policy P-301', 'Order Not Received Protocol', 'Escalation Authority Level 2'],
+        resolution: (ctx) =>
+          `Dear ${ctx.agent || 'Agent'},\n\nAfter reviewing Case ${ctx.orderId}, I am authorizing the following SME action:\n\nThe customer is reporting non-receipt of their order. Per Refund Policy P-301, if tracking confirms delivery without customer receipt, we must initiate a reshipping or full refund within 48 hours.\n\n✅ APPROVED ACTION: Process a full refund to the original payment method. Refund should reflect within 3–5 business days.\n\n📎 Document this decision under Order Not Received exception and close the case as Resolved.`,
+        risk: '⚠️ High chargeback risk. Handle immediately — failure to resolve may result in bank dispute escalation.',
+      },
+      {
+        id: 'DAMAGED_ITEM',
+        category: 'Damaged / Missing Item',
+        priority: 'high',
+        keywords: ['damaged', 'broken', 'defective', 'wrong item', 'missing item', 'incomplete order', 'only received', 'arrived broken', 'arrived damaged', 'wrong product'],
+        policies: ['Product Defect Policy P-215', 'Replacement & Exchange Protocol', 'Photo Evidence Requirement'],
+        resolution: (ctx) =>
+          `Dear ${ctx.agent || 'Agent'},\n\nFor Case ${ctx.orderId} — Damaged/Missing Item Report:\n\nPer Product Defect Policy P-215, the customer is entitled to a free replacement or a full refund. Photo evidence of the damage must be requested if not already provided.\n\n✅ APPROVED ACTION: Offer the customer a free replacement shipment with expedited shipping, or a full refund if the item is out of stock.\n\n📎 Attach photo evidence to the case file before closing.`,
+        risk: '📦 Verify inventory before offering replacement. If out-of-stock, escalate to refund immediately.',
+      },
+      {
+        id: 'SHIPPING_DELAY',
+        category: 'Shipping & Delivery Delay',
+        priority: 'normal',
+        keywords: ['late', 'delay', 'delayed', 'shipping time', 'estimated delivery', 'still in transit', 'not delivered yet', 'taking too long', 'weeks', 'hasn\'t arrived', 'tracking not updating', 'stuck in transit'],
+        policies: ['Shipping SLA Policy P-118', 'Carrier Communication Protocol', 'Goodwill Gesture Authorization'],
+        resolution: (ctx) =>
+          `Dear ${ctx.agent || 'Agent'},\n\nFor Case ${ctx.orderId} — Shipping Delay:\n\nCheck the carrier tracking status first. If the package has been in transit for more than 10 business days without an update, initiate a carrier trace investigation.\n\n✅ APPROVED ACTION: Apologize for the inconvenience and apply a 15% goodwill discount code to the customer's account. If not resolved within 5 days, authorize a full reship or refund per Shipping SLA Policy P-118.\n\n📎 Log carrier trace request number in the case notes.`,
+        risk: '🕐 Monitor for 5 business days after carrier trace. If no resolution, escalate to Critical.',
+      },
+      {
+        id: 'ACCOUNT_SUSPENSION',
+        category: 'Account Suspension / Access Issue',
+        priority: 'critical',
+        keywords: ['account suspended', 'banned', 'account locked', 'can\'t login', 'cannot login', 'locked out', 'access denied', 'account disabled', 'blocked account', 'account blocked', 'account closed'],
+        policies: ['Account Security Policy P-402', 'Fraud Prevention Review', 'Identity Verification Protocol'],
+        resolution: (ctx) =>
+          `Dear ${ctx.agent || 'Agent'},\n\nFor Case ${ctx.orderId} — Account Suspension Review:\n\nThis requires immediate Security Team review. Do NOT reinstate access without completing the Identity Verification Protocol.\n\n✅ APPROVED ACTION: Submit the case to the Security Team queue. Inform the customer the review will take 24–48 hours. If the suspension was due to a system error, restore access and apply a $10 account credit as goodwill.\n\n⛔ Do NOT release account details over chat. Verify identity via email confirmation only.`,
+        risk: '🔒 Potential fraud or identity theft risk. Security Team review is mandatory before any account action.',
+      },
+      {
+        id: 'VIP_EXCEPTION',
+        category: 'Policy Exception — VIP Case',
+        priority: 'vip',
+        keywords: ['vip', 'loyal customer', 'long time customer', 'years', 'always shop', 'unacceptable', 'appalled', 'disgusted', 'furious', 'this is ridiculous', 'supervisor', 'manager', 'escalate', 'legal action', 'attorney', 'news', 'social media', 'post online', 'twitter', 'instagram', 'complaint'],
+        policies: ['VIP Exception Authority P-500', 'Goodwill Override Authorization', 'Brand Protection Protocol'],
+        resolution: (ctx) =>
+          `Dear ${ctx.agent || 'Agent'},\n\nFor Case ${ctx.orderId} — VIP / High-Risk Escalation:\n\nThis case has been flagged for VIP handling. The customer has expressed significant frustration and/or has indicated they are a long-term customer or may share their experience publicly.\n\n✅ APPROVED ACTION: Apply maximum goodwill gesture — full refund OR replacement + a 20% loyalty discount code. Personally apologize on behalf of the brand. Escalate to the Brand Relations team if social media mention is confirmed.\n\n🌟 Priority handling required. Resolution target: within 4 hours.`,
+        risk: '🚨 Brand reputation at risk. Treat with highest urgency. Log under Brand Protection Protocol.',
+      },
+    ];
+
+    // ── UTILITY FUNCTIONS ──────────────────────────────────────────────────────
+
+    let caseLog = [];
+
+    function escHtml(str) {
+      if (!str) return '';
+      return String(str).replace(/&/g,'&amp;').replace(/</g,'&lt;').replace(/>/g,'&gt;').replace(/"/g,'&quot;').replace(/'/g,'&#39;');
+    }
+
+    function generateCaseId() {
+      return 'ESC-' + Math.random().toString(36).substring(2, 8).toUpperCase();
+    }
+
+    function formatTime(date) {
+      return date.toLocaleTimeString('en-US', { hour: '2-digit', minute: '2-digit', hour12: true });
+    }
+
+    function matchRule(text) {
+      const lower = text.toLowerCase();
+      let bestMatch = null;
+      let bestScore = 0;
+
+      for (const rule of rules) {
+        let score = 0;
+        for (const kw of rule.keywords) {
+          if (lower.includes(kw)) score++;
+        }
+        if (score > bestScore) {
+          bestScore = score;
+          bestMatch = rule;
+        }
+      }
+
+      // Boost VIP override — if VIP keywords appear with other keywords, VIP wins
+      const vipRule = rules.find(r => r.id === 'VIP_EXCEPTION');
+      if (vipRule) {
+        let vipScore = 0;
+        for (const kw of vipRule.keywords) {
+          if (lower.includes(kw)) vipScore++;
+        }
+        if (vipScore >= 1 && bestMatch && bestMatch.id !== 'VIP_EXCEPTION') {
+          return vipRule;
+        }
+      }
+
+      return bestMatch || null;
+    }
+
+    // ── MAIN TRIAGE LOGIC ──────────────────────────────────────────────────────
+
+    // ── CHANNEL FIELDS TOGGLE ────────────────────────────────────────────────
+
+    function updateChannelFields(channel) {
+      document.querySelectorAll('.channel-fields').forEach(el => el.style.display = 'none');
+      const map = { 'Chat': 'fields-chat', 'Email': 'fields-email', 'Phone': 'fields-phone', 'Social': 'fields-social' };
+      const targetId = map[channel];
+      if (targetId) document.getElementById(targetId).style.display = 'block';
+    }
+
+    function getContactInfo(channel) {
+      const name = document.getElementById('customer-name').value.trim() || 'Customer';
+      let detail = '';
+      if (channel === 'Chat') {
+        const sid = document.getElementById('chat-session-id').value.trim();
+        detail = sid ? `Session: ${sid}` : '';
+      } else if (channel === 'Email') {
+        detail = document.getElementById('customer-email').value.trim();
+      } else if (channel === 'Phone') {
+        detail = document.getElementById('customer-phone').value.trim();
+      } else if (channel === 'Social') {
+        const platform = document.getElementById('social-platform').value;
+        const handle  = document.getElementById('social-handle').value.trim();
+        detail = handle ? `${platform}: ${handle}` : platform;
+      }
+      return { name, detail };
+    }
+
+    function runTriage() {
+      const text = document.getElementById('case-text').value.trim();
+      const rawAgent = document.getElementById('agent-name').value.trim() || 'Unknown Agent';
+      const rawOrderId = document.getElementById('order-id').value.trim() || 'N/A';
+      const channel = escHtml(document.getElementById('channel').value);
+      const { name: rawCustomerName, detail: rawContactDetail } = getContactInfo(channel);
+
+      const agent = escHtml(rawAgent);
+      const orderId = escHtml(rawOrderId);
+      const customerName = escHtml(rawCustomerName);
+      const contactDetail = escHtml(rawContactDetail);
+
+      if (!text || text.length < 20) {
+        document.getElementById('case-text').focus();
+        document.getElementById('case-text').style.borderColor = 'var(--critical)';
+        setTimeout(() => { document.getElementById('case-text').style.borderColor = ''; }, 2000);
+        return;
+      }
+
+      const panel = document.getElementById('result-panel');
+      const thinkingEl = document.getElementById('thinking-state');
+      const contentEl = document.getElementById('result-content');
+
+      panel.classList.add('visible');
+      thinkingEl.style.display = 'block';
+      contentEl.style.display = 'none';
+      panel.scrollIntoView({ behavior: 'smooth', block: 'start' });
+
+      setTimeout(() => {
+        const rule = matchRule(text);
+        const caseId = generateCaseId();
+        const now = new Date();
+
+        thinkingEl.style.display = 'none';
+        contentEl.style.display = 'block';
+
+        if (!rule) {
+          renderResult({
+            caseId, now, agent, orderId, channel,
+            priority: 'normal',
+            category: 'General Inquiry',
+            resolution: `Dear ${agent},\n\nFor Case ${orderId} — Customer: ${customerName}:\n\nNo specific policy trigger detected. Proceed with standard customer service protocol. Provide accurate information, remain empathetic, and offer follow-up within 24 hours if unresolved.\n\n✅ APPROVED ACTION: Standard resolution — provide policy information and close when customer confirms satisfaction.`,
+            policies: ['Standard CS Protocol P-001'],
+            risk: '✅ Low risk. Handle via standard process.',
+          });
+          addToLog({ caseId, time: formatTime(now), agent, channel, customerName, contactDetail, category: 'General Inquiry', priority: 'normal', action: 'Standard Protocol' });
+        } else {
+          const ctx = { agent, orderId };
+          renderResult({
+            caseId, now, agent, orderId, channel,
+            priority: rule.priority,
+            category: rule.category,
+            resolution: rule.resolution(ctx),
+            policies: rule.policies,
+            risk: rule.risk,
+          });
+          addToLog({ caseId, time: formatTime(now), agent, channel, customerName, contactDetail, category: rule.category, priority: rule.priority, action: rule.resolution(ctx).split('\n\n')[2]?.replace('✅ APPROVED ACTION: ', '').split('.')[0] || '—' });
+        }
+      }, 1200);
+    }
+
+    function renderResult({ caseId, now, priority, category, resolution, policies, risk }) {
+      const priorityColors = {
+        critical: { cls: 'critical', label: '🔴 CRITICAL' },
+        high:     { cls: 'high',     label: '🟡 HIGH' },
+        normal:   { cls: 'normal',   label: '🟢 NORMAL' },
+        vip:      { cls: 'vip',      label: '⭐ VIP' },
+      };
+      const p = priorityColors[priority] || priorityColors['normal'];
+
+      document.getElementById('result-timestamp').textContent = now.toLocaleString('en-US', { month: 'short', day: 'numeric', hour: '2-digit', minute: '2-digit' });
+      document.getElementById('case-id').textContent = caseId;
+      document.getElementById('priority-badge').className = `priority-badge ${p.cls}`;
+      document.getElementById('priority-badge').textContent = p.label;
+      document.getElementById('category-text').textContent = category;
+      document.getElementById('resolution-text').innerHTML = resolution.replace(/\n/g, '<br>');
+      document.getElementById('risk-notes').textContent = risk;
+
+      const tagsEl = document.getElementById('policy-tags');
+      tagsEl.innerHTML = policies.map(p => `<span class="policy-tag">${p}</span>`).join('');
+    }
+
+    function addToLog({ caseId, time, agent, channel, customerName, contactDetail, category, priority, action }) {
+      const priorityLabels = { critical: '🔴 Critical', high: '🟡 High', normal: '🟢 Normal', vip: '⭐ VIP' };
+      caseLog.unshift({ caseId, time, agent, channel, customerName, contactDetail, category, priority, action });
+
+      const tbody = document.getElementById('log-body');
+      document.getElementById('log-count').textContent = caseLog.length;
+
+      tbody.innerHTML = caseLog.map(c => `
+        <tr>
+          <td><code style="font-family:'JetBrains Mono',monospace;font-size:12px;color:var(--accent)">${c.caseId}</code></td>
+          <td>${c.time}</td>
+          <td>${c.agent}</td>
+          <td>${c.channel}</td>
+          <td>
+            <div style="font-weight:600;color:var(--text-primary);font-size:12px;">${c.customerName || '—'}</div>
+            ${c.contactDetail ? `<div style="font-size:11px;color:var(--text-muted);margin-top:1px;">${c.contactDetail}</div>` : ''}
+          </td>
+          <td>${c.category}</td>
+          <td>${priorityLabels[c.priority] || c.priority}</td>
+          <td style="max-width:200px;white-space:nowrap;overflow:hidden;text-overflow:ellipsis;">${c.action}</td>
+        </tr>
+      `).join('');
+    }
+
+    function clearResult() {
+      document.getElementById('result-panel').classList.remove('visible');
+      document.getElementById('result-content').style.display = 'block';
+    }
+
+    function clearLog() {
+      caseLog = [];
+      document.getElementById('log-count').textContent = '0';
+      document.getElementById('log-body').innerHTML = `
+        <tr><td colspan="8">
+          <div class="empty-state">
+            <div class="empty-state-icon">📭</div>
+            No cases triaged yet. Submit a case above to get started.
+          </div>
+        </td></tr>`;
+    }
+  </script>
+
+</body>
+</html>
