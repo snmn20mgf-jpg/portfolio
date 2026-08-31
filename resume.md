@@ -14,7 +14,7 @@ Analytical and results-driven **Data Engineer, Data Analyst, and AI Solutions Sp
 ## CORE COMPETENCIES & KEYWORD INDEX
 - **Data Engineering & Databases:** Relational Database Normalization (3NF), SQL Query Optimization, Indexing, Joins, Aggregations, Window Functions, Entity-Relationship (ER) Modeling, ETL Pipelines, Data Extraction, Cleansing & Ingestion, Python Data Parsing Scripts, Database Administration.
 - **Data Analysis & Business Intelligence:** Operational KPI Auditing, SLA & CSAT Performance Tracking, Root-Cause Analysis (RCA), Trend Analysis, Metric Variance Diagnostics, Data Auditing, Standard Operating Procedures (SOPs).
-- **Software & AI Engineering:** AI Agent Orchestration, Multi-Step Prompt Pipelines, Object-Oriented Programming (Java, C++), Python, JavaScript/TypeScript, Next.js, React, Tailwind CSS, RESTful API Integration.
+- **Software & AI Engineering:** AI Agent Orchestration, Multi-Step Prompt Pipelines, Claude, Cursor, Antigravity IDE, Object-Oriented Programming (Java, C++), Python, JavaScript/TypeScript, Next.js, React, Tailwind CSS, RESTful API Integration.
 - **Operations & Systems Administration:** IT Infrastructure Administration, Hardware & Software Asset Lifecycle Tracking, Escalation Governance (SME), Team Leadership, Quality Assurance (QA).
 
 ---
@@ -23,7 +23,7 @@ Analytical and results-driven **Data Engineer, Data Analyst, and AI Solutions Sp
 - **Databases & Data Engineering:** SQL (PostgreSQL, MySQL, SQLite), Relational Schema Design (3NF), ER Diagrams, ETL Data Ingestion, Index Optimization, Query Tuning, Python Data Scripts.
 - **Data Analysis & BI:** Operational KPI Monitoring, SLA/CSAT Metrics Auditing, Metric Variance Tracking, Root-Cause Analysis (RCA), Dashboard Reporting, Process SOP Documentation.
 - **Software & Web Engineering:** Java (OOP), C++, Python, JavaScript (ES6+), TypeScript, Next.js, React, Tailwind CSS, HTML5/CSS3, Algorithms & Logic.
-- **AI Automation & Cloud Tools:** AI API Pipelines, Prompt Engineering, Git, GitHub, Cloudflare Pages/Workers, Vercel, Antigravity IDE.
+- **AI Automation & Cloud Tools:** Claude, Cursor, Antigravity IDE, AI API Pipelines, Prompt Engineering, Git, GitHub, Cloudflare Pages/Workers, Vercel.
 - **Languages:** English (Professional Advanced Proficiency — C1/C2), Spanish (Native).
 
 ---
