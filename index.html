@@ -3,8 +3,8 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Leonardo Levi Joaquin Colorado | AI Solutions Engineer & Software Specialist</title>
-  <meta name="description" content="Portfolio of Leonardo Levi Joaquin Colorado — AI Solutions Engineer, Software Developer, and Former AEO SME & Operations Supervisor." />
+  <title>Leonardo Levi Joaquin Colorado | Data Engineer, Data Analyst &amp; AI Solutions Specialist</title>
+  <meta name="description" content="Portfolio of Leonardo Levi Joaquin Colorado — Data Engineer, Data Analyst, AI Solutions Engineer, and Former AEO SME & Operations Supervisor." />
   
   <!-- Security Meta Tags -->
   <meta http-equiv="Content-Security-Policy" content="default-src 'self'; script-src 'self' 'unsafe-inline' https://cdn.tailwindcss.com https://unpkg.com; style-src 'self' 'unsafe-inline' https://fonts.googleapis.com; font-src https://fonts.gstatic.com 'self' data:; img-src 'self' data: https:; connect-src 'self';">
@@ -96,6 +96,25 @@
     .reticle-bl { bottom: 8px; left: 8px; }
     .reticle-br { bottom: 8px; right: 8px; }
 
+    /* Alien Radar Pulse Status Keyframe */
+    @keyframes radar-pulse {
+      0% {
+        transform: scale(0.95);
+        opacity: 0.9;
+      }
+      70% {
+        transform: scale(2.2);
+        opacity: 0;
+      }
+      100% {
+        transform: scale(2.4);
+        opacity: 0;
+      }
+    }
+    .radar-pulse-ring {
+      animation: radar-pulse 2.2s cubic-bezier(0, 0.2, 0.8, 1) infinite;
+    }
+
     /* Alien Spaceship (UFO) Floating Animations */
     @keyframes ufo-float {
       0%, 100% {
@@ -124,6 +143,18 @@
       display: inline-flex;
       vertical-align: middle;
     }
+
+    /* Terminal Drawer Scrollbar */
+    .terminal-scroll::-webkit-scrollbar {
+      width: 4px;
+    }
+    .terminal-scroll::-webkit-scrollbar-track {
+      background: rgba(2, 44, 34, 0.4);
+    }
+    .terminal-scroll::-webkit-scrollbar-thumb {
+      background: rgba(16, 185, 129, 0.5);
+      border-radius: 2px;
+    }
   </style>
 </head>
 <body class="bg-slate-50 text-slate-800 font-sans antialiased selection:bg-brand-500 selection:text-white transition-colors duration-300 dark:bg-slate-950 dark:text-slate-100 relative">
@@ -135,7 +166,7 @@
         <span class="animate-ping absolute inline-flex h-full w-full rounded-full bg-brand-400 opacity-75"></span>
         <span class="relative inline-flex rounded-full h-2 w-2 bg-brand-500"></span>
       </span>
-      <span>Open to AI Solutions, Software Engineering &amp; Data Roles • Bilingual (EN/ES)</span>
+      <span>Open to Data Engineering, Data Analytics, Software &amp; IT Roles • Bilingual (EN/ES)</span>
     </div>
   </div>
 
@@ -190,6 +221,15 @@
         <div class="lg:col-span-7 space-y-6">
           
           <div class="flex flex-wrap items-center gap-2.5">
+            <!-- Alien Radar Pulse Status Badge -->
+            <div class="inline-flex items-center gap-2 px-3 py-1.5 rounded-full bg-emerald-500/10 border border-emerald-500/30 text-emerald-700 dark:text-emerald-400 font-mono text-[11px] font-semibold backdrop-blur-sm">
+              <span class="relative flex h-2.5 w-2.5">
+                <span class="radar-pulse-ring absolute inline-flex h-full w-full rounded-full bg-emerald-400 opacity-75"></span>
+                <span class="relative inline-flex rounded-full h-2.5 w-2.5 bg-emerald-500"></span>
+              </span>
+              <span>[ 🟢 SIGNAL: ONLINE // DATA PIPELINE ACTIVE ]</span>
+            </div>
+
             <!-- Hero Role Badge with Mini Alien Scout Ship -->
             <div class="inline-flex items-center gap-2 px-3.5 py-1.5 rounded-full bg-brand-50 border border-brand-200 text-brand-700 text-xs font-semibold dark:bg-brand-950/50 dark:border-brand-800 dark:text-brand-300">
               <span class="ufo-float" title="Alien Scout Craft">
@@ -205,25 +245,25 @@
                   <path d="M10 11.2 L8 14.5 L16 14.5 L14 11.2 Z" class="fill-emerald-400/30" />
                 </svg>
               </span>
-              <span>AI Solutions Engineer • Software Developer • Data &amp; IT Specialist</span>
+              <span>Data Engineer • Data Analyst • AI Solutions Engineer • Software &amp; IT Specialist</span>
             </div>
           </div>
 
-          <!-- Hero Headline (Option B) -->
+          <!-- Hero Headline -->
           <h1 class="text-4xl sm:text-5xl lg:text-6xl font-extrabold text-slate-900 dark:text-white tracking-tight leading-[1.15]">
             Architecting <span class="text-transparent bg-clip-text bg-gradient-to-r from-brand-600 to-teal-500">intelligent AI systems</span> from real-world operational logic.
           </h1>
 
           <p class="text-base sm:text-lg text-slate-600 dark:text-slate-300 leading-relaxed max-w-2xl">
-            Hi, I’m <strong>Leonardo Levi Joaquin Colorado</strong>. I combine <strong>4+ years of high-stakes operational leadership &amp; SME case resolution</strong> for American Eagle Outfitters with cutting-edge expertise in <strong>AI agent pipelines, prompt engineering, SQL relational architecture (3NF), and full-stack software development</strong>.
+            Hi, I’m <strong>Leonardo Levi Joaquin Colorado</strong>. I combine <strong>4+ years of data-driven operational leadership &amp; KPI analytics</strong> for American Eagle Outfitters with rigorous expertise in <strong>Relational Database Normalization (3NF), SQL Query Optimization, ETL Data Ingestion, and Full-Stack Software Development</strong>.
           </p>
 
           <!-- Technical Pills with Alien Decrypt Effect -->
           <div class="flex flex-wrap items-center gap-2 pt-1 font-mono text-xs">
-            <span class="alien-decrypt px-3 py-1.5 rounded-xl bg-emerald-100/80 text-emerald-900 border border-emerald-300/80 dark:bg-emerald-950/60 dark:text-emerald-300 dark:border-emerald-800/80 cursor-crosshair shadow-sm hover:border-emerald-500 transition-colors" data-original="AI Agent Pipelines">AI Agent Pipelines</span>
             <span class="alien-decrypt px-3 py-1.5 rounded-xl bg-emerald-100/80 text-emerald-900 border border-emerald-300/80 dark:bg-emerald-950/60 dark:text-emerald-300 dark:border-emerald-800/80 cursor-crosshair shadow-sm hover:border-emerald-500 transition-colors" data-original="SQL / 3NF Schemas">SQL / 3NF Schemas</span>
-            <span class="alien-decrypt px-3 py-1.5 rounded-xl bg-emerald-100/80 text-emerald-900 border border-emerald-300/80 dark:bg-emerald-950/60 dark:text-emerald-300 dark:border-emerald-800/80 cursor-crosshair shadow-sm hover:border-emerald-500 transition-colors" data-original="ETL & Data Ingestion">ETL &amp; Data Ingestion</span>
-            <span class="alien-decrypt px-3 py-1.5 rounded-xl bg-emerald-100/80 text-emerald-900 border border-emerald-300/80 dark:bg-emerald-950/60 dark:text-emerald-300 dark:border-emerald-800/80 cursor-crosshair shadow-sm hover:border-emerald-500 transition-colors" data-original="Java / OOP Design">Java / OOP Design</span>
+            <span class="alien-decrypt px-3 py-1.5 rounded-xl bg-emerald-100/80 text-emerald-900 border border-emerald-300/80 dark:bg-emerald-950/60 dark:text-emerald-300 dark:border-emerald-800/80 cursor-crosshair shadow-sm hover:border-emerald-500 transition-colors" data-original="ETL &amp; Data Pipelines">ETL &amp; Data Pipelines</span>
+            <span class="alien-decrypt px-3 py-1.5 rounded-xl bg-emerald-100/80 text-emerald-900 border border-emerald-300/80 dark:bg-emerald-950/60 dark:text-emerald-300 dark:border-emerald-800/80 cursor-crosshair shadow-sm hover:border-emerald-500 transition-colors" data-original="KPI Analytics &amp; Metrics">KPI Analytics &amp; Metrics</span>
+            <span class="alien-decrypt px-3 py-1.5 rounded-xl bg-emerald-100/80 text-emerald-900 border border-emerald-300/80 dark:bg-emerald-950/60 dark:text-emerald-300 dark:border-emerald-800/80 cursor-crosshair shadow-sm hover:border-emerald-500 transition-colors" data-original="Query Optimization">Query Optimization</span>
           </div>
 
           <div class="flex flex-wrap items-center gap-3 pt-2">
@@ -247,7 +287,7 @@
           <div class="grid grid-cols-3 gap-4 pt-6 border-t border-slate-200/80 dark:border-slate-800">
             <div>
               <div class="text-2xl font-bold text-slate-900 dark:text-white">4+ Yrs</div>
-              <div class="text-xs text-slate-500 dark:text-slate-400">AEO Operations &amp; SME</div>
+              <div class="text-xs text-slate-500 dark:text-slate-400">Data Ops &amp; KPI Analytics</div>
             </div>
             <div>
               <div class="text-2xl font-bold text-brand-600">70%+</div>
@@ -280,18 +320,18 @@
               </div>
               <span class="text-xs font-mono text-slate-400 dark:text-slate-500 flex items-center gap-1">
                 <i data-lucide="cpu" class="w-3 h-3 text-emerald-500"></i>
-                ai.config.ts
+                telemetry.config.ts
               </span>
             </div>
 
             <div class="py-4 space-y-3 font-mono text-xs text-slate-700 dark:text-slate-300">
               <p><span class="text-purple-600 dark:text-purple-400">const</span> <span class="text-blue-600 dark:text-blue-400">specialist</span> = {</p>
               <p class="pl-4"><span class="text-slate-500 dark:text-slate-400">name:</span> <span class="text-brand-600">"Leonardo Levi Joaquin Colorado"</span>,</p>
-              <p class="pl-4"><span class="text-slate-500 dark:text-slate-400">role:</span> <span class="text-emerald-500">"AI Solutions &amp; Software Specialist"</span>,</p>
-              <p class="pl-4"><span class="text-slate-500 dark:text-slate-400">focus:</span> [<span class="text-amber-600">"AI Agent Pipelines"</span>, <span class="text-amber-600">"SQL / 3NF Schemas"</span>, <span class="text-amber-600">"Java/OOP"</span>],</p>
+              <p class="pl-4"><span class="text-slate-500 dark:text-slate-400">role:</span> <span class="text-emerald-500">"Data &amp; AI Solutions Specialist"</span>,</p>
+              <p class="pl-4"><span class="text-slate-500 dark:text-slate-400">focus:</span> [<span class="text-amber-600">"SQL / 3NF Schemas"</span>, <span class="text-amber-600">"ETL Data Pipelines"</span>, <span class="text-amber-600">"KPI Analytics"</span>],</p>
               <p class="pl-4"><span class="text-slate-500 dark:text-slate-400">degree:</span> <span class="text-brand-600">"B.S. IT Administration (UNITEC) — 70%+"</span>,</p>
-              <p class="pl-4"><span class="text-slate-500 dark:text-slate-400">strengths:</span> [<span class="text-teal-600">"Critical Thinking"</span>, <span class="text-teal-600">"Escalation SME"</span>, <span class="text-teal-600">"Data Modeling"</span>],</p>
-              <p class="pl-4"><span class="text-slate-500 dark:text-slate-400">status:</span> <span class="text-emerald-500 font-semibold">"Ready to Build &amp; Scale"</span></p>
+              <p class="pl-4"><span class="text-slate-500 dark:text-slate-400">strengths:</span> [<span class="text-teal-600">"Data Modeling"</span>, <span class="text-teal-600">"Root-Cause Analysis (RCA)"</span>, <span class="text-teal-600">"Escalation SME"</span>],</p>
+              <p class="pl-4"><span class="text-slate-500 dark:text-slate-400">status:</span> <span class="text-emerald-500 font-semibold">"Telemetry Active // Ready to Deploy"</span></p>
               <p>};</p>
             </div>
 
@@ -331,7 +371,7 @@
           <h2 class="text-3xl font-bold text-slate-900 dark:text-white tracking-tight">Featured Projects</h2>
         </div>
         <p class="text-sm text-slate-500 dark:text-slate-400 max-w-md">
-          A showcase of intelligent AI-driven applications, normalized SQL databases, and real-world software solutions.
+          A showcase of real-world data pipelines, normalized relational databases, algorithmic modeling, and software engineering.
         </p>
       </div>
 
@@ -347,24 +387,24 @@
           <div class="relative bg-gradient-to-br from-teal-500/10 via-slate-100 to-brand-50 p-6 border-b border-slate-200/60 dark:from-teal-950/40 dark:via-slate-800/40 dark:to-slate-900">
             <div class="flex items-center justify-between mb-4">
               <span class="inline-flex items-center gap-1.5 px-2.5 py-1 rounded-full bg-teal-100 text-teal-800 text-xs font-bold dark:bg-teal-900/60 dark:text-teal-300 font-mono">
-                <i data-lucide="bot" class="w-3 h-3"></i> AI &amp; SQL System
+                <i data-lucide="binary" class="w-3 h-3"></i> ETL &amp; NLP Pipeline
               </span>
-              <span class="text-xs font-mono text-slate-500">AI Logic · Database</span>
+              <span class="text-xs font-mono text-slate-500">SQL (3NF) · Triage</span>
             </div>
             <h3 class="text-xl font-bold text-slate-900 dark:text-white">AI Escalation Triage Engine</h3>
-            <p class="text-xs text-slate-600 dark:text-slate-300 mt-1">SME Support Assistant &amp; Automated Case Resolver</p>
+            <p class="text-xs text-slate-600 dark:text-slate-300 mt-1">ETL Ingestion &amp; Automated Case Classification</p>
           </div>
 
           <div class="p-6 flex-1 flex flex-col justify-between space-y-4">
             <p class="text-sm text-slate-600 dark:text-slate-300 leading-relaxed">
-              Inspired by real Subject Matter Expert workflows at American Eagle: ingests unstructured customer escalations, queries relational policy databases (3NF), detects exceptions, and drafts compliant resolution recommendations using AI prompting pipelines.
+              Inspired by real Subject Matter Expert workflows at American Eagle: ingests unstructured customer tickets, runs automated ETL extraction, validates against a 3NF relational SQL policy schema, detects operational risk exceptions, and outputs deterministic resolution directives.
             </p>
 
             <div class="space-y-3">
               <div class="flex flex-wrap gap-1.5 font-mono">
-                <span class="px-2 py-0.5 bg-slate-100 text-slate-700 rounded-md text-xs dark:bg-slate-800 dark:text-slate-300">AI Prompting</span>
+                <span class="px-2 py-0.5 bg-slate-100 text-slate-700 rounded-md text-xs dark:bg-slate-800 dark:text-slate-300">ETL Pipeline</span>
                 <span class="px-2 py-0.5 bg-slate-100 text-slate-700 rounded-md text-xs dark:bg-slate-800 dark:text-slate-300">SQL Schema (3NF)</span>
-                <span class="px-2 py-0.5 bg-slate-100 text-slate-700 rounded-md text-xs dark:bg-slate-800 dark:text-slate-300">Python / JS</span>
+                <span class="px-2 py-0.5 bg-slate-100 text-slate-700 rounded-md text-xs dark:bg-slate-800 dark:text-slate-300">NLP Ingestion</span>
                 <span class="px-2 py-0.5 bg-slate-100 text-slate-700 rounded-md text-xs dark:bg-slate-800 dark:text-slate-300">Risk Scoring</span>
               </div>
 
@@ -393,7 +433,7 @@
               <span class="text-xs font-mono text-slate-500">Java / C++ · SQL</span>
             </div>
             <h3 class="text-xl font-bold text-slate-900 dark:text-white">Enterprise IT Asset Manager</h3>
-            <p class="text-xs text-slate-600 dark:text-slate-300 mt-1">3NF Schema Design &amp; Inventory Telemetry</p>
+            <p class="text-xs text-slate-600 dark:text-slate-300 mt-1">3NF Schema Design &amp; Inventory Analytics</p>
           </div>
 
           <div class="p-6 flex-1 flex flex-col justify-between space-y-4">
@@ -405,7 +445,7 @@
               <div class="flex flex-wrap gap-1.5 font-mono">
                 <span class="px-2 py-0.5 bg-slate-100 text-slate-700 rounded-md text-xs dark:bg-slate-800 dark:text-slate-300">3NF Normalization</span>
                 <span class="px-2 py-0.5 bg-slate-100 text-slate-700 rounded-md text-xs dark:bg-slate-800 dark:text-slate-300">SQL Analytics</span>
-                <span class="px-2 py-0.5 bg-slate-100 text-slate-700 rounded-md text-xs dark:bg-slate-800 dark:text-slate-300">Java / C++</span>
+                <span class="px-2 py-0.5 bg-slate-100 text-slate-700 rounded-md text-xs dark:bg-slate-800 dark:text-slate-300">ER Modeling</span>
                 <span class="px-2 py-0.5 bg-slate-100 text-slate-700 rounded-md text-xs dark:bg-slate-800 dark:text-slate-300">Audit Logging</span>
               </div>
 
@@ -429,25 +469,25 @@
           <div class="relative bg-gradient-to-br from-purple-500/10 via-slate-100 to-brand-50 p-6 border-b border-slate-200/60 dark:from-purple-950/40 dark:via-slate-800/40 dark:to-slate-900">
             <div class="flex items-center justify-between mb-4">
               <span class="inline-flex items-center gap-1.5 px-2.5 py-1 rounded-full bg-brand-100 text-brand-800 text-xs font-bold dark:bg-brand-900/60 dark:text-brand-300 font-mono">
-                <i data-lucide="globe" class="w-3 h-3"></i> Live Web App
+                <i data-lucide="activity" class="w-3 h-3"></i> API Ingestion &amp; Risk
               </span>
               <span class="text-xs font-mono text-slate-500">Next.js · Vercel</span>
             </div>
             <h3 class="text-xl font-bold text-slate-900 dark:text-white">YeckFun</h3>
-            <p class="text-xs text-slate-600 dark:text-slate-300 mt-1">Smart Event Planning &amp; Algorithmic Risk Assessment</p>
+            <p class="text-xs text-slate-600 dark:text-slate-300 mt-1">Real-Time Data API Ingestion &amp; Algorithmic Risk Modeling</p>
           </div>
 
           <div class="p-6 flex-1 flex flex-col justify-between space-y-4">
             <p class="text-sm text-slate-600 dark:text-slate-300 leading-relaxed">
-              Interactive application ingesting real-time weather and geographical APIs to evaluate terrain hazards, model climate risk vectors, and dynamically compute budget scenarios for outdoor events.
+              Interactive platform ingesting real-time weather and geographical APIs to evaluate terrain hazards, model climate risk vectors, and dynamically compute budget scenarios for large-scale outdoor events.
             </p>
 
             <div class="space-y-3">
               <div class="flex flex-wrap gap-1.5 font-mono">
                 <span class="px-2 py-0.5 bg-slate-100 text-slate-700 rounded-md text-xs dark:bg-slate-800 dark:text-slate-300">API Ingestion</span>
-                <span class="px-2 py-0.5 bg-slate-100 text-slate-700 rounded-md text-xs dark:bg-slate-800 dark:text-slate-300">Next.js</span>
-                <span class="px-2 py-0.5 bg-slate-100 text-slate-700 rounded-md text-xs dark:bg-slate-800 dark:text-slate-300">React</span>
                 <span class="px-2 py-0.5 bg-slate-100 text-slate-700 rounded-md text-xs dark:bg-slate-800 dark:text-slate-300">Risk Modeling</span>
+                <span class="px-2 py-0.5 bg-slate-100 text-slate-700 rounded-md text-xs dark:bg-slate-800 dark:text-slate-300">Next.js</span>
+                <span class="px-2 py-0.5 bg-slate-100 text-slate-700 rounded-md text-xs dark:bg-slate-800 dark:text-slate-300">Data Analytics</span>
               </div>
 
               <div class="pt-2 flex items-center gap-3">
@@ -463,7 +503,7 @@
       </div>
     </section>
 
-    <!-- SECTION: TECHNICAL SKILLS (BENTO GRID) -->
+    <!-- SECTION: TECHNICAL SKILLS (BENTO GRID - DATA & ENGINEERING) -->
     <section id="skills" class="space-y-8">
       <div>
         <div class="inline-flex items-center gap-2 text-xs font-semibold tracking-wider uppercase text-brand-600 font-mono mb-2">
@@ -481,15 +521,15 @@
           <i data-lucide="cpu" class="w-4 h-4"></i>
           <span>Technical Competencies</span>
         </div>
-        <h2 class="text-3xl font-bold text-slate-900 dark:text-white tracking-tight">AI &amp; Engineering Stack</h2>
+        <h2 class="text-3xl font-bold text-slate-900 dark:text-white tracking-tight">Data &amp; Engineering Stack</h2>
         <p class="text-sm text-slate-500 dark:text-slate-400 mt-1">
-          Specialized in AI-assisted development, SQL database architecture, data pipelines, and software engineering.
+          Specialized in SQL database architecture, data extraction pipelines, KPI analytics, and software logic.
         </p>
       </div>
 
       <div class="grid grid-cols-1 md:grid-cols-3 lg:grid-cols-4 gap-4">
 
-        <!-- Card 1: AI & Modern Development (md:col-span-2) -->
+        <!-- Card 1: Databases & Data Engineering (md:col-span-2) -->
         <div class="reticle-card md:col-span-2 bg-white rounded-3xl border border-slate-200/80 p-6 dark:bg-slate-900 dark:border-slate-800 space-y-4">
           <span class="reticle-corner reticle-tl">[ ┼</span>
           <span class="reticle-corner reticle-tr">┼ ]</span>
@@ -498,35 +538,35 @@
 
           <div class="flex items-center gap-3">
             <div class="w-10 h-10 rounded-2xl bg-brand-50 text-brand-600 dark:bg-brand-950/50 dark:text-brand-400 flex items-center justify-center">
-              <i data-lucide="sparkles" class="w-5 h-5"></i>
+              <i data-lucide="database" class="w-5 h-5"></i>
             </div>
             <div>
-              <h3 class="text-base font-bold text-slate-900 dark:text-white">AI-Assisted Engineering</h3>
-              <p class="text-xs text-slate-500 dark:text-slate-400">Agent Orchestration &amp; Rapid Architecture</p>
+              <h3 class="text-base font-bold text-slate-900 dark:text-white">Databases &amp; Data Engineering</h3>
+              <p class="text-xs text-slate-500 dark:text-slate-400">Relational Modeling, Query Tuning &amp; ETL</p>
             </div>
           </div>
 
           <div class="grid grid-cols-1 sm:grid-cols-2 gap-2.5 pt-2">
             <div class="p-3 rounded-2xl bg-slate-50 dark:bg-slate-800/60 border border-slate-100 dark:border-slate-800">
-              <div class="font-mono text-xs font-bold text-slate-900 dark:text-white">AI Agent Orchestration</div>
-              <div class="text-[11px] text-slate-500 mt-0.5">Multi-step autonomous agent workflows &amp; code generation</div>
+              <div class="font-mono text-xs font-bold text-slate-900 dark:text-white">SQL Optimization</div>
+              <div class="text-[11px] text-slate-500 mt-0.5">Advanced Joins, Window Functions, Indexing &amp; Query Tuning</div>
             </div>
             <div class="p-3 rounded-2xl bg-slate-50 dark:bg-slate-800/60 border border-slate-100 dark:border-slate-800">
-              <div class="font-mono text-xs font-bold text-slate-900 dark:text-white">Prompt Pipeline Design</div>
-              <div class="text-[11px] text-slate-500 mt-0.5">Structured I/O, chain-of-thought &amp; policy extraction</div>
+              <div class="font-mono text-xs font-bold text-slate-900 dark:text-white">Relational Schemas (3NF)</div>
+              <div class="text-[11px] text-slate-500 mt-0.5">Third Normal Form, ER Diagrams, Referential Integrity</div>
             </div>
             <div class="p-3 rounded-2xl bg-slate-50 dark:bg-slate-800/60 border border-slate-100 dark:border-slate-800">
-              <div class="font-mono text-xs font-bold text-slate-900 dark:text-white">Core Languages</div>
-              <div class="text-[11px] text-slate-500 mt-0.5">Java (OOP), C++, Python &amp; JavaScript/TypeScript</div>
+              <div class="font-mono text-xs font-bold text-slate-900 dark:text-white">ETL &amp; Data Pipelines</div>
+              <div class="text-[11px] text-slate-500 mt-0.5">Data Extraction, Transformation, Cleansing &amp; Ingestion</div>
             </div>
             <div class="p-3 rounded-2xl bg-slate-50 dark:bg-slate-800/60 border border-slate-100 dark:border-slate-800">
-              <div class="font-mono text-xs font-bold text-slate-900 dark:text-white">Full-Stack Frameworks</div>
-              <div class="text-[11px] text-slate-500 mt-0.5">Next.js, React, Tailwind CSS &amp; Cloudflare Workers</div>
+              <div class="font-mono text-xs font-bold text-slate-900 dark:text-white">Python Data Scripts</div>
+              <div class="text-[11px] text-slate-500 mt-0.5">Automated Data Parsing, Batch Scripts &amp; API Ingestion</div>
             </div>
           </div>
         </div>
 
-        <!-- Card 2: Databases & Data Engineering -->
+        <!-- Card 2: Data Analysis & Business Intelligence -->
         <div class="reticle-card bg-white rounded-3xl border border-slate-200/80 p-6 dark:bg-slate-900 dark:border-slate-800 space-y-4">
           <span class="reticle-corner reticle-tl">[ ┼</span>
           <span class="reticle-corner reticle-tr">┼ ]</span>
@@ -534,28 +574,6 @@
           <span class="reticle-corner reticle-br">┼ ]</span>
 
           <div class="w-10 h-10 rounded-2xl bg-teal-50 text-teal-600 dark:bg-teal-950/50 dark:text-teal-400 flex items-center justify-center">
-            <i data-lucide="database" class="w-5 h-5"></i>
-          </div>
-          <div>
-            <h3 class="text-base font-bold text-slate-900 dark:text-white">Databases &amp; SQL</h3>
-            <p class="text-xs text-slate-500 dark:text-slate-400">3NF Normalization &amp; Tuning</p>
-          </div>
-          <ul class="space-y-2 text-xs text-slate-600 dark:text-slate-300">
-            <li class="flex items-center gap-2"><i data-lucide="check" class="w-3.5 h-3.5 text-brand-600"></i> Relational Schemas (3NF)</li>
-            <li class="flex items-center gap-2"><i data-lucide="check" class="w-3.5 h-3.5 text-brand-600"></i> SQL Joins &amp; Window Functions</li>
-            <li class="flex items-center gap-2"><i data-lucide="check" class="w-3.5 h-3.5 text-brand-600"></i> Query Optimization &amp; Indexing</li>
-            <li class="flex items-center gap-2"><i data-lucide="check" class="w-3.5 h-3.5 text-brand-600"></i> ETL Data Ingestion Scripts</li>
-          </ul>
-        </div>
-
-        <!-- Card 3: Data Analytics & Business Intelligence -->
-        <div class="reticle-card bg-white rounded-3xl border border-slate-200/80 p-6 dark:bg-slate-900 dark:border-slate-800 space-y-4">
-          <span class="reticle-corner reticle-tl">[ ┼</span>
-          <span class="reticle-corner reticle-tr">┼ ]</span>
-          <span class="reticle-corner reticle-bl">[ ┼</span>
-          <span class="reticle-corner reticle-br">┼ ]</span>
-
-          <div class="w-10 h-10 rounded-2xl bg-emerald-50 text-emerald-600 dark:bg-emerald-950/50 dark:text-emerald-400 flex items-center justify-center">
             <i data-lucide="bar-chart-3" class="w-5 h-5"></i>
           </div>
           <div>
@@ -566,7 +584,29 @@
             <li class="flex items-center gap-2"><i data-lucide="check" class="w-3.5 h-3.5 text-brand-600"></i> Operational KPI Auditing</li>
             <li class="flex items-center gap-2"><i data-lucide="check" class="w-3.5 h-3.5 text-brand-600"></i> SLA &amp; CSAT Metrics Tracking</li>
             <li class="flex items-center gap-2"><i data-lucide="check" class="w-3.5 h-3.5 text-brand-600"></i> Root-Cause Analysis (RCA)</li>
-            <li class="flex items-center gap-2"><i data-lucide="check" class="w-3.5 h-3.5 text-brand-600"></i> Metric Variance Diagnostics</li>
+            <li class="flex items-center gap-2"><i data-lucide="check" class="w-3.5 h-3.5 text-brand-600"></i> Metric Trend Variance Diagnostics</li>
+          </ul>
+        </div>
+
+        <!-- Card 3: Software & Web Engineering -->
+        <div class="reticle-card bg-white rounded-3xl border border-slate-200/80 p-6 dark:bg-slate-900 dark:border-slate-800 space-y-4">
+          <span class="reticle-corner reticle-tl">[ ┼</span>
+          <span class="reticle-corner reticle-tr">┼ ]</span>
+          <span class="reticle-corner reticle-bl">[ ┼</span>
+          <span class="reticle-corner reticle-br">┼ ]</span>
+
+          <div class="w-10 h-10 rounded-2xl bg-amber-50 text-amber-600 dark:bg-amber-950/50 dark:text-amber-400 flex items-center justify-center">
+            <i data-lucide="terminal" class="w-5 h-5"></i>
+          </div>
+          <div>
+            <h3 class="text-base font-bold text-slate-900 dark:text-white">Software &amp; AI Tools</h3>
+            <p class="text-xs text-slate-500 dark:text-slate-400">Languages &amp; Frameworks</p>
+          </div>
+          <ul class="space-y-2 text-xs text-slate-600 dark:text-slate-300">
+            <li class="flex items-center gap-2"><i data-lucide="check" class="w-3.5 h-3.5 text-brand-600"></i> Java (OOP) &amp; C++</li>
+            <li class="flex items-center gap-2"><i data-lucide="check" class="w-3.5 h-3.5 text-brand-600"></i> Python &amp; JavaScript/TypeScript</li>
+            <li class="flex items-center gap-2"><i data-lucide="check" class="w-3.5 h-3.5 text-brand-600"></i> Next.js, React &amp; Tailwind CSS</li>
+            <li class="flex items-center gap-2"><i data-lucide="check" class="w-3.5 h-3.5 text-brand-600"></i> AI API Data Pipelines</li>
           </ul>
         </div>
 
@@ -778,7 +818,7 @@
           <div>
             <h4 class="text-xs font-bold uppercase tracking-wider text-slate-400 font-mono">Analytical Competencies</h4>
             <div class="flex flex-wrap gap-2 mt-2">
-              <span class="px-2.5 py-1 rounded-full bg-emerald-50 text-emerald-800 dark:bg-emerald-950/60 dark:text-emerald-300 text-xs">AI Prompt Systems</span>
+              <span class="px-2.5 py-1 rounded-full bg-emerald-50 text-emerald-800 dark:bg-emerald-950/60 dark:text-emerald-300 text-xs">Quantitative Thinking</span>
               <span class="px-2.5 py-1 rounded-full bg-emerald-50 text-emerald-800 dark:bg-emerald-950/60 dark:text-emerald-300 text-xs">Root-Cause Analysis</span>
               <span class="px-2.5 py-1 rounded-full bg-emerald-50 text-emerald-800 dark:bg-emerald-950/60 dark:text-emerald-300 text-xs">Data Schema Normalization</span>
               <span class="px-2.5 py-1 rounded-full bg-emerald-50 text-emerald-800 dark:bg-emerald-950/60 dark:text-emerald-300 text-xs">Process Automation</span>
@@ -814,10 +854,10 @@
           <span>Ready to Deploy</span>
         </div>
         <h2 class="text-3xl sm:text-4xl font-extrabold text-slate-900 dark:text-white tracking-tight">
-          Ready to contribute to your AI &amp; engineering team.
+          Ready to contribute to your data &amp; engineering team.
         </h2>
         <p class="text-sm sm:text-base text-slate-600 dark:text-slate-300">
-          Whether you're looking for an AI Solutions Engineer, a Software Developer, a Data Analyst, or an IT Specialist with 4+ years of real-world operational leadership, let's connect.
+          Whether you're looking for a Data Analyst, Data Engineer, AI Solutions Specialist, or Software Developer with 4+ years of real-world operational leadership, let's connect.
         </p>
       </div>
 
@@ -854,7 +894,68 @@
     </div>
   </footer>
 
-  <!-- SCRIPT FOR THEME TOGGLE, LUCIDE ICONS, RADAR CANVAS & ALIEN GLYPHS -->
+  <!-- FLOATING ACTION BUTTON: ALIEN TELEMETRY DRAWER TRIGGER -->
+  <div class="fixed bottom-5 right-5 z-40">
+    <button id="toggle-data-logs-btn" class="group flex items-center gap-2 px-4 py-2.5 rounded-2xl bg-slate-900/90 text-emerald-400 border border-emerald-500/40 shadow-lg shadow-emerald-950/40 backdrop-blur-md hover:bg-slate-900 hover:border-emerald-400 transition-all font-mono text-xs font-semibold hover:scale-105 active:scale-95 cursor-pointer">
+      <span class="relative flex h-2 w-2">
+        <span class="animate-ping absolute inline-flex h-full w-full rounded-full bg-emerald-400 opacity-75"></span>
+        <span class="relative inline-flex rounded-full h-2 w-2 bg-emerald-500"></span>
+      </span>
+      <span>[ 🛸 TRANSMIT DATA LOGS ]</span>
+    </button>
+  </div>
+
+  <!-- ALIEN TELEMETRY DATA LOGS DRAWER -->
+  <div id="data-logs-drawer" class="fixed bottom-0 right-0 max-w-lg w-full z-50 transform translate-y-full transition-transform duration-300 ease-out font-mono text-xs p-4 pointer-events-none">
+    <div class="bg-slate-950/95 border border-emerald-500/50 text-emerald-300 rounded-3xl shadow-2xl backdrop-blur-xl overflow-hidden flex flex-col pointer-events-auto">
+      
+      <!-- Drawer Header -->
+      <div class="flex items-center justify-between px-4 py-3 bg-emerald-950/60 border-b border-emerald-500/30 text-emerald-400">
+        <div class="flex items-center gap-2">
+          <span class="w-2.5 h-2.5 rounded-full bg-emerald-400 animate-pulse"></span>
+          <span class="font-bold text-[11px] tracking-wide">[ SECURE TELEMETRY LINK // NODE-01 ]</span>
+        </div>
+        <button id="close-data-logs-btn" class="text-emerald-400 hover:text-white px-2 py-1 rounded-lg hover:bg-emerald-900/50 transition-colors text-[11px] cursor-pointer">
+          [ ✕ CLOSE ]
+        </button>
+      </div>
+
+      <!-- Drawer Content -->
+      <div class="p-4 space-y-3">
+        <!-- Live System Metric Gauges -->
+        <div class="grid grid-cols-3 gap-2 text-center text-[10px]">
+          <div class="p-2 rounded-xl bg-emerald-950/40 border border-emerald-500/20">
+            <div class="text-slate-400">PIPELINE</div>
+            <div class="font-bold text-emerald-400 mt-0.5">1.4k rec/s</div>
+          </div>
+          <div class="p-2 rounded-xl bg-emerald-950/40 border border-emerald-500/20">
+            <div class="text-slate-400">LATENCY</div>
+            <div class="font-bold text-emerald-400 mt-0.5">3.8 ms</div>
+          </div>
+          <div class="p-2 rounded-xl bg-emerald-950/40 border border-emerald-500/20">
+            <div class="text-slate-400">3NF STATUS</div>
+            <div class="font-bold text-emerald-400 mt-0.5">VERIFIED</div>
+          </div>
+        </div>
+
+        <!-- Terminal Output Stream -->
+        <div id="telemetry-log-stream" class="h-44 overflow-y-auto terminal-scroll bg-black/60 rounded-xl p-3 text-[11px] text-emerald-400/90 leading-relaxed font-mono space-y-1">
+          <div>&gt; INITIALIZING TELEMETRY STREAM...</div>
+          <div>&gt; [OK] Connected to snmn20mgf-jpg/portfolio</div>
+          <div>&gt; [SCHEMA] Validating 3NF Relational Schemas: 100% PASS</div>
+          <div>&gt; [ETL] Ingesting AEO Escalation Resolution Matrix...</div>
+          <div>&gt; [RADAR] Planetary Telemetry Sweep: NOMINAL</div>
+        </div>
+
+        <div class="flex items-center justify-between text-[10px] text-slate-500 pt-1 border-t border-emerald-500/20">
+          <span>Signal: 99.8% Encryption (TLS 1.3)</span>
+          <span class="text-emerald-400/80">STATUS: BROADCASTING</span>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- SCRIPT FOR THEME TOGGLE, LUCIDE ICONS, RADAR CANVAS, ALIEN GLYPHS & DRAWER -->
   <script>
     // 1. Initialize Lucide Icons
     lucide.createIcons();
@@ -1021,6 +1122,65 @@
           }, 35);
         });
       });
+    })();
+
+    // 6. Alien Telemetry Data Logs Drawer
+    (function initDataLogsDrawer() {
+      const toggleBtn = document.getElementById('toggle-data-logs-btn');
+      const closeBtn = document.getElementById('close-data-logs-btn');
+      const drawer = document.getElementById('data-logs-drawer');
+      const stream = document.getElementById('telemetry-log-stream');
+      if (!toggleBtn || !drawer || !stream) return;
+
+      let isOpen = false;
+      let intervalId = null;
+
+      const logTemplates = [
+        '[ETL] Batch parsed 150 customer tickets with 0 schema violations',
+        '[3NF] SQL Referential integrity check: FOREIGN KEYS NOMINAL',
+        '[RCA] Root-Cause Analysis trigger: Shipping delay clustering identified',
+        '[METRICS] Rolling CSAT: 97.2% • SLA Target: 99.1% Compliance',
+        '[CACHE] Query cache invalidated • Rebuilt in 2.1ms',
+        '[TELEMETRY] Node heartbeat pulse broadcasted to edge workers',
+        '[OPTIMIZE] Index scan on order_id executed in 1.4ms',
+      ];
+
+      function openDrawer() {
+        isOpen = true;
+        drawer.classList.remove('translate-y-full');
+        drawer.classList.add('translate-y-0');
+
+        if (!intervalId) {
+          intervalId = setInterval(() => {
+            const time = new Date().toLocaleTimeString('en-US', { hour12: false });
+            const line = document.createElement('div');
+            const msg = logTemplates[Math.floor(Math.random() * logTemplates.length)];
+            line.textContent = `> [${time}] ${msg}`;
+            stream.appendChild(line);
+            stream.scrollTop = stream.scrollHeight;
+            if (stream.children.length > 40) {
+              stream.removeChild(stream.children[0]);
+            }
+          }, 2400);
+        }
+      }
+
+      function closeDrawer() {
+        isOpen = false;
+        drawer.classList.remove('translate-y-0');
+        drawer.classList.add('translate-y-full');
+        if (intervalId) {
+          clearInterval(intervalId);
+          intervalId = null;
+        }
+      }
+
+      toggleBtn.addEventListener('click', () => {
+        if (isOpen) closeDrawer();
+        else openDrawer();
+      });
+
+      closeBtn.addEventListener('click', closeDrawer);
     })();
   </script>
 </body>
