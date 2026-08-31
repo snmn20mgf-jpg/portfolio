@@ -1,6 +1,6 @@
 # Leonardo Levi Joaquin Colorado
 **Data Engineer • Data Analyst • AI Solutions Engineer • Software & IT Specialist**  
-State of Mexico, Mexico • +52 55 1489 1005 • coloradolevi10@gmail.com  
+Mexico, Mexico • +52 55 1489 1005 • coloradolevi10@gmail.com  
 Portfolio: https://portfolio.snmn20mgf.workers.dev/  
 LinkedIn: https://www.linkedin.com/in/leonardo-levi-joaquin-colorado-946128219/  
 
