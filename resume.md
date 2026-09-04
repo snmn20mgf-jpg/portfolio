@@ -30,19 +30,20 @@ Analytical and results-driven **Data Engineer, Data Analyst, and AI Solutions Sp
 
 ## FEATURED TECHNICAL PROJECTS
 
-### AI Support Escalation & Case Triage Engine — ETL & NLP Data Pipeline
+### YeckFun — Live Production App (Active Development)
+*Tech Stack: React • Next.js • TypeScript • AI-Assisted Workflows • Vercel (Live at: https://yeck-fun.vercel.app/)*  
+- Built and deployed a production event risk calculation platform using AI-accelerated workflows, shipping 5x faster with >95 Lighthouse scores.
+- Ingests real-time weather and geographical APIs to evaluate terrain hazards, model climate vectors, and dynamically compute budget scenarios with active feature development.
+
+### AI Support Escalation & Case Triage Engine — Architectural Prototype & Concept
 *Tech Stack: Python / Node.js • Relational SQL Database (3NF) • AI Prompting Pipelines • Cloudflare*  
-- Architected an automated ETL and case triage data pipeline that ingests unstructured customer tickets, validates against a normalized 3NF relational SQL policy schema, and outputs deterministic risk classifications.
-- Engineered automated exception-tagging logic derived from real-world American Eagle SME operating procedures, reducing manual escalation review turnaround time while ensuring strict policy compliance.
+- Engineered an exploratory workflow prototype inspired by real-world American Eagle SME operations: ingests unstructured customer tickets, validates against a normalized 3NF relational SQL policy schema, and outputs deterministic risk classifications.
+- Implemented automated exception-tagging logic to test deterministic escalation review turnaround while ensuring strict policy compliance.
 
-### Enterprise IT Asset & Operations Manager — Relational Database Architecture & Analytics
+### Enterprise IT Asset & Operations Manager — Architectural Prototype & Concept
 *Tech Stack: Java / C++ • SQL Normalized Schema (3NF) • OOP Design • Inventory Analytics*  
-- Designed and built a transactional asset and operations management system featuring a 3NF normalized SQL database architecture with strict foreign-key referential integrity and audit logging.
-- Implemented multi-criteria asset filtering and inventory telemetry to provide real-time operational visibility into enterprise hardware/software availability.
-
-### YeckFun — Real-Time Data API Ingestion & Algorithmic Risk Modeling
-*Tech Stack: Next.js • React • Tailwind CSS • Vercel (Live at: https://yeck-fun.vercel.app/)*  
-- Built and deployed a responsive event risk calculation platform that ingests real-time weather and geographical APIs to evaluate terrain risk factors, model climate vectors, and dynamically compute budget scenarios.
+- Designed an exploratory database architecture concept featuring a transactional 3NF normalized SQL schema, foreign-key referential integrity, and asset lifecycle audit logging.
+- Implemented multi-criteria asset filtering and inventory telemetry to simulate enterprise hardware/software availability tracking.
 
 ---
 
