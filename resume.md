@@ -52,15 +52,15 @@ Analytical and results-driven **Data Engineer, Data Analyst, and AI Solutions Sp
 ### American Eagle Outfitters (AEO) Campaign | Teleperformance
 *Mexico (Professional English Operations) | Over 4 Years Experience*
 
-- **Customer Service Supervisor — Data-Driven Operations & Team Leadership**  
-  - Analyzed daily and weekly agent KPI performance datasets, SLA targets, and customer satisfaction (CSAT) scores using SQL and spreadsheet reporting tools to optimize floor productivity.
-  - Conducted metric variance analysis and led structured, data-driven coaching sessions that consistently maintained team performance above enterprise SLA thresholds.
-  - Coordinated operational escalation workflows between frontline operations, quality assurance teams, and senior campaign leadership.
-
 - **Subject Matter Expert (SME) — Data Auditing & Escalation Governance**  
   - Handled Tier-2 and Tier-3 escalations requiring specialized review, policy exceptions, and quantitative root-cause analysis (RCA) on systemic service bottlenecks.
   - Audited case logs for compliance with American Eagle enterprise operating procedures, identifying operational defect trends and updating internal knowledge base SOPs.
   - Served as the final operational authority for high-stakes account actions, data exceptions, and policy overrides.
+
+- **Customer Service Supervisor — Data-Driven Operations & Team Leadership**  
+  - Analyzed daily and weekly agent KPI performance datasets, SLA targets, and customer satisfaction (CSAT) scores using SQL and spreadsheet reporting tools to optimize floor productivity.
+  - Conducted metric variance analysis and led structured, data-driven coaching sessions that consistently maintained team performance above enterprise SLA thresholds.
+  - Coordinated operational escalation workflows between frontline operations, quality assurance teams, and senior campaign leadership.
 
 - **Customer Service Specialist — Frontline Data Collection & Omnichannel Resolution**  
   - Handled high-volume omnichannel customer interactions in fluent English, consistently achieving top-quartile customer satisfaction (CSAT) and first-contact resolution (FCR) ratings.
