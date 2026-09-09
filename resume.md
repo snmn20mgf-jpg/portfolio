@@ -35,6 +35,11 @@ Analytical and results-driven **Data Engineer, Data Analyst, and AI Solutions Sp
 - Built and deployed a production event risk calculation platform using AI-accelerated workflows, shipping 5x faster with >95 Lighthouse scores.
 - Ingests real-time weather and geographical APIs to evaluate terrain hazards, model climate vectors, and dynamically compute budget scenarios with active feature development.
 
+### TapeDeck 1974: The Analog Logic Machine — Live Web Game (Continuous Learning Lab)
+*Tech Stack: React 19 • TypeScript • Tailwind CSS • Web Audio API • Vite • Surge.sh (Live at: https://tapedeck-1974.surge.sh)*  
+- Engineered an interactive 1970s analog-themed logic training engine to maintain peak proficiency in reactive state machines, browser audio APIs, and algorithmic problem solving.
+- Implemented zero-dependency Web Audio synthesizers (relay clicks, tape hum, harmonic chimes), real-time VU meter telemetry, and procedural puzzle generators for Boolean logic gates, SQL query patching, binary/hex conversions, and syntax bug hunting.
+
 ### AI Support Escalation & Case Triage Engine — Architectural Prototype & Concept
 *Tech Stack: Python / Node.js • Relational SQL Database (3NF) • AI Prompting Pipelines • Cloudflare*  
 - Engineered an exploratory workflow prototype inspired by real-world American Eagle SME operations: ingests unstructured customer tickets, validates against a normalized 3NF relational SQL policy schema, and outputs deterministic risk classifications.
