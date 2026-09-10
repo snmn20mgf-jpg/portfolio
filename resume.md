@@ -30,10 +30,11 @@ Analytical and results-driven **Data Engineer, Data Analyst, and AI Solutions Sp
 
 ## FEATURED TECHNICAL PROJECTS
 
-### YeckFun — Live Production App (Active Development)
-*Tech Stack: React • Next.js • TypeScript • AI-Assisted Workflows • Vercel (Live at: https://yeck-fun.vercel.app/)*  
-- Built and deployed a production event risk calculation platform using AI-accelerated workflows, shipping 5x faster with >95 Lighthouse scores.
-- Ingests real-time weather and geographical APIs to evaluate terrain hazards, model climate vectors, and dynamically compute budget scenarios with active feature development.
+### YeckFun — Flagship Production App (Active Development & Continuous Updates)
+*Tech Stack: React 19 • Next.js (App Router) • TypeScript • Zod • Tailwind CSS • Vercel (Live at: https://yeck-fun.vercel.app/)*  
+- Engineered a flagship event risk calculation and financial simulation platform over 4+ months of iterative hand-coding from the ground up; currently live in production and actively evolving.
+- Implemented a dynamic multi-vector risk engine ingesting real-time weather and geographical APIs to model environmental hazard indexes and terrain vectors.
+- Built a reactive zero-latency budget simulator dynamically re-computing cost tiers and contingency buffers, backed by strict runtime Zod schema validation (>95 Lighthouse scores).
 
 ### TapeDeck 1974: The Analog Logic Machine — Live Web Game (Continuous Learning Lab)
 *Tech Stack: React 19 • TypeScript • Tailwind CSS • Web Audio API • Vite • Surge.sh (Live at: https://tapedeck-1974.surge.sh)*  
