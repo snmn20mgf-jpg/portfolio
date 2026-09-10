@@ -40,6 +40,11 @@ Analytical and results-driven **Data Engineer, Data Analyst, and AI Solutions Sp
 - Engineered an interactive 1970s analog-themed logic training engine to maintain peak proficiency in reactive state machines, browser audio APIs, and algorithmic problem solving.
 - Implemented zero-dependency Web Audio synthesizers (relay clicks, tape hum, harmonic chimes), real-time VU meter telemetry, and procedural puzzle generators for Boolean logic gates, SQL query patching, binary/hex conversions, and syntax bug hunting.
 
+### Pingüino Rampage México: Alien Siege — Live Retro Arcade Game (1986 Arcade Tribute)
+*Tech Stack: TypeScript • HTML5 Canvas 2D API • Web Audio API • Vite • Surge.sh (Live at: https://pinguino-mariachi.surge.sh)*  
+- Engineered a retro 1986 Rampage-inspired 2D run-and-gun arcade game featuring custom 60fps Canvas physics (Trompo Cannon directional blasting, belly-slide dashes), multi-layered cultural parallax environments (CDMX & Puebla), and food powerups.
+- Developed a procedural zero-dependency Web Audio chiptune synthesizer generating dual-trumpet Mariachi melodies, vihuela rhythms, and guitarrón basslines natively in the browser with bilingual localization and touch controls.
+
 ### AI Support Escalation & Case Triage Engine — Architectural Prototype & Concept
 *Tech Stack: Python / Node.js • Relational SQL Database (3NF) • AI Prompting Pipelines • Cloudflare*  
 - Engineered an exploratory workflow prototype inspired by real-world American Eagle SME operations: ingests unstructured customer tickets, validates against a normalized 3NF relational SQL policy schema, and outputs deterministic risk classifications.
